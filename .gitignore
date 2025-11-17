@@ -1,0 +1,26 @@
+# Obsidian settings
+.obsidian/
+
+# Sandbox for testing
+9_Sandbox/
+
+# Gemini context file
+GEMINI.md
+
+# Build artifacts and temporary files
+*.pdf
+*.docx
+
+# Project Admin files that are not part of the thesis
+3_Project_Admin/Guidelines_for_Master_Thesis_SS_2023.pdf
+3_Project_Admin/Thesis_Progress_Tracker.md
+
+# Reference Material
+4_Reference_Material/Master Thesis concrete.docx
+
+# User-specific templates
+Templates/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

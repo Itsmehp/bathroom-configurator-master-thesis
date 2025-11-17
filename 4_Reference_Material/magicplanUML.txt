@@ -1,0 +1,35 @@
+sequenceDiagram
+    participant Client
+    participant Router
+    participant ValidatePlanId as Validate<br/>PlanId
+    participant ValidateSaveQuery as Validate<br/>SaveQuery
+    participant Handler as Route<br/>Handler
+    participant MagicPlan as MagicPlan<br/>API
+    participant DB as Database
+
+    Client->>Router: POST /:planId/save<br/>(query: update, saveExploded)
+    Router->>ValidatePlanId: Check planId format
+    alt Validation fails
+        ValidatePlanId-->>Client: 400 Invalid planId
+    else Validation passes
+        ValidatePlanId->>ValidateSaveQuery: Check query params
+        alt Query validation fails
+            ValidateSaveQuery-->>Client: 400 Invalid query
+        else Query validation passes
+            ValidateSaveQuery->>Handler: Proceed to handler
+            Handler->>MagicPlan: Fetch plan data
+            MagicPlan-->>Handler: Plan response
+            Handler->>Handler: Extract/clean data
+            Handler->>DB: Start transaction
+            DB->>DB: Check if plan exists
+            alt Plan exists & update flag set
+                DB->>DB: Delete existing rooms
+            end
+            DB->>DB: Upsert plan
+            alt saveExploded flag set
+                DB->>DB: Parse & save exploded data
+            end
+            DB->>DB: Commit transaction
+            Handler-->>Client: 200 Success
+        end
+    end
