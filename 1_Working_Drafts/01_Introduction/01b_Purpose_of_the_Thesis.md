@@ -12,3 +12,4 @@ To accomplish this, the project will focus on the following key objectives:
 
    3. Deliver Actionable Output: The final recommendations must be usable for the sales process. The prototype will therefore:
        * Generate output in a structured format (such as JSON or PDF) to support quotation generation and integration with other software.
+    

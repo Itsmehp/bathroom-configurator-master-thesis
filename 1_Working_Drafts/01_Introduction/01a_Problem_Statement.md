@@ -30,4 +30,4 @@ The traditional process results in a fragmented and protracted customer journey.
 
 ### Conclusion: A Timely Opportunity for Innovation
 
-While these challenges are long-standing within the bathroom renovation sector, the recent integration of consumer-grade LiDAR sensors into common devices, such as smartphones and tablets, presents a novel and timely opportunity to address these inefficiencies comprehensively.
+While these challenges are long-standing within the bathroom renovation sector, the recent integration of consumer-grade LiDAR sensors into common devices, such as smartphones and tablets, presents a novel and timely opportunity to address these inefficiencies comprehensively especially for growing businesses that cannot rely on slow customer engagement.

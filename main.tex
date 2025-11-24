@@ -1,0 +1,62 @@
+\documentclass[12pt, a4paper]{report}
+
+% -------------------
+% PREAMBLE
+% -------------------
+% All packages, custom commands, and document settings are in this file.
+\input{latex/00_preamble.tex}
+
+% Point to the bibliography file
+\addbibresource{references.bib}
+
+% -------------------
+% DOCUMENT START
+% -------------------
+\begin{document}
+
+% -------------------
+% FRONT MATTER
+% -------------------
+% The title page content is in a separate file.
+\input{latex/01_titlepage.tex}
+
+% The executive summary (or abstract) is in a separate file.
+\input{latex/02_executive_summary.tex}
+
+% Generate the Table of Contents
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+
+
+% -------------------
+% MAIN CONTENT (CHAPTERS)
+% -------------------
+% Each chapter is included from the 'chapters' directory.
+% Using \include starts each chapter on a new page.
+\include{latex/03_chapters/01_introduction}
+\include{latex/03_chapters/02_system_requirements}
+\include{latex/03_chapters/03_lidar_integration}
+\include{latex/03_chapters/04_recommendation_algorithm}
+\include{latex/03_chapters/05_system_implementation}
+\include{latex/03_chapters/06_testing_and_evaluation}
+\include{latex/03_chapters/07_discussion_of_findings}
+\include{latex/03_chapters/08_conclusion}
+
+
+% -------------------
+% BACK MATTER
+% -------------------
+% The appendix is included here.
+\appendix
+\include{latex/04_appendix}
+
+% The bibliography is printed here.
+\cleardoublepage
+\include{latex/03_chapters/09_bibliography}
+
+
+\end{document}
+% -------------------
+% DOCUMENT END
+% -------------------

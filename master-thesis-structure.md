@@ -36,7 +36,7 @@
 - [x] Product Categories: Changed from complete bathroom renovations to shower upgrades (such as converting a bathtub to a shower or replacing an existing shower).
 - [x] Technical Details/Constraints: Full-stack web application (Next.js, TypeScript, Express, Postgres), iOS LiDAR devices, partner database integration.
 
-## Preview of the overall structure (thesis structure) ✅
+## Preview of the overall structure (thesis structure) 
 
 # System Requirements and Architecture Designing ✅
 

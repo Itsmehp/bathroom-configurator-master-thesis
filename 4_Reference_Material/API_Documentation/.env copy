@@ -1,0 +1,38 @@
+# Backend Environment Variables
+# --------------------------------
+# NODE_ENV: Runtime environment (development | production | test)
+NODE_ENV=development
+
+# Server port (used in server.ts, default fallback 8000 there but validated default 3000)
+PORT=8000
+
+# JWT secret for signing auth tokens (used in auth routes & middleware)
+# Generate a strong random string in production.
+JWT_SECRET=dev_super_secret_change_me
+
+# Optional: Pre-generated JWT for scripts (e.g., uploadProducts.ts) if you want to bypass manual login during dev
+# WARNING: Not validated by validateEnv.ts
+JWT_TOKEN=dev_super_secret_change_me
+
+# Prisma / Database connection string.
+# For local Postgres via Docker (adjust user/pass/host/port/db as needed):
+# DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
+# If using docker-compose service name as host inside another container, use the service name instead of localhost.
+DATABASE_URL=postgresql://myuser:mypassword@localhost:5432/myapp?schema=public
+
+# Frontend origin allowed for CORS (server.ts uses FRONTEND_URL or defaults to http://localhost:3000)
+FRONTEND_URL=http://localhost:3000
+
+# MagicPlan integration keys (used in routes/magicplan.ts)
+MAGICPLAN_API_KEY=247f40bbff291c30c4197f203e81f0e7d08e
+MAGICPLAN_CUSTOMER_ID=5df0c613c3876
+
+# Feature flags / detection (computed in server.ts). Leave blank if not used.
+# Add other variables here as project grows.
+
+# --------------------------------
+# After editing this file, restart your dev server.
+# If you modify the Prisma schema, run:
+#   npx prisma generate
+#   npx prisma migrate dev --name some_migration_name  (for schema changes)
+# --------------------------------

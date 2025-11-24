@@ -1,5 +1,11 @@
 # Introduction
 
+The integration of advanced digital technologies, such as Artificial Intelligence, the Internet of Things, and high-precision sensor systems like LiDAR, is rapidly transforming traditional industries. The construction and home renovation sector, long characterized by its reliance on manual processes, is increasingly seeking innovative solutions to enhance efficiency, reduce costs, and improve customer satisfaction in a competitive and evolving market [Author, Year]. This digitalization trend is applicable in specialized segments, such as bathroom renovations, where accurate measurements and precise product matching are paramount for successful project execution and client satisfaction.
+
+Despite the advancements in data capture technologies, significant operational inefficiencies persist within the bathroom renovation industry, particularly concerning the process of specifying, quoting, and recommending suitable products, such as shower enclosures. The current workflows are often characterized by time-consuming manual measurements, subjective product selection based on limited on-site visualization, and a disjointed customer journey [Internal Company Review, 2025]. These challenges not only impede business scalability and profitability but also expose projects to considerable risks of inaccuracy, leading to financial losses and diminished customer trust.
+
+This Master's Thesis addresses these critical industry pain points by proposing and developing a novel LiDAR-based product recommendation system specifically tailored for shower enclosures. By leveraging precise spatial data acquired through modern LiDAR sensors and integrating intelligent algorithms, this research aims to automate and optimize the product selection and quotation process. The objective is to significantly reduce the operational overhead for renovation businesses while simultaneously enriching the customer experience through accurate, real-time visualization and product matching. The subsequent sections of this chapter will detail the specific problem statement, the overarching purpose and objectives of this thesis, its defined scope, and provide an outline of the thesis structure.
+
 - [[01a_Problem_Statement]]
 - [[01b_Purpose_of_the_Thesis]]
 - [[01c_Scope]]

@@ -15,9 +15,7 @@ The primary software used for quote generation was "HERO Software"[^1], a compre
 
 Furthermore, the software's high licensing costs posed a significant financial burden, especially since many of its features, designed for general construction, were rarely used by the company.
 
-*[Note: A citation for HERO Software should be added to the bibliography. The information regarding usability and staff feedback is based on internal discussions and observations within the sales team.]*
-
-### 2.1.2 Limitations of the Subsequent In-House Solution
+### 2.1.3 Limitations of the Subsequent In-House Solution
 
 To address these issues, a simpler, more user-friendly application was developed internally using JavaScript. While this application improved usability, it introduced a different problem: it lacked intelligent filtering capabilities. The sales team still could not automatically select or recommend shower enclosures based on critical parameters such as:
 
@@ -43,6 +41,7 @@ The system must provide the following functionalities:
 | FR-3 | The system shall provide options to select products based on door type (e.g., sliding, pivot, folding).       | Must-have   |
 | FR-4 | The system shall allow filtering based on the orientation of the shower door (left, right, or universal).     | Should-have |
 | FR-5 | The system shall generate a preliminary quote based on the selected product and configuration.                | Should-have |
+| FR-6 | The system must have full Mac Support.                                                                        |             |
 
 ### 2.2.2 Non-Functional Requirements
 
@@ -54,3 +53,4 @@ The system must adhere to the following quality attributes:
 | NFR-2 | The system must perform quickly, allowing for real-time quote generation during a customer consultation.               | Must-have   |
 | NFR-3 | The system must be accessible on both desktop and tablet devices.                                                      | Should-have |
 | NFR-4 | The total cost of ownership (development and maintenance) must be significantly lower than previous licensed software. | Must-have   |
+| NFR-5 | The user interface must be multi-lingual.                                                                              | Must-have   |
