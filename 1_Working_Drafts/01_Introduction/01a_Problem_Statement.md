@@ -6,7 +6,7 @@ The process of specifying and quoting shower enclosures within the bathroom reno
 
 The conventional workflow for generating a customer quotation is a manually intensive and time-consuming process. A single customer engagement requires a sales representative to invest substantial time across several stages:
 
--   **Travel Time:** Approximately two to three hours are often dedicated solely to traveling to and from the customer's location.
+-   **Travel Time:** Approximately one to three hours are often dedicated solely to traveling to and from the customer's location.
 -   **On-Site Assessment:** The assessment itself, which involves the meticulous measurement and documentation of the bathroom space, consumes an additional hour of a representative's time.
 -   **Manual Office Work:** Following the on-site visit, the representative must return to the office to manually calculate costs, prepare a detailed quotation, and select suitable shower enclosures. This selection is frequently constrained by the customer's remaining budget after accounting for labor and other materials, adding a further layer of complexity.
 

@@ -1,6 +1,6 @@
-\section*{Executive Summary}
-
-{\fontsize{10pt}{12pt}
+{\raggedright\fontsize{16}{19}\bfseries Executive Summary\par}
+\vspace{1.5em}
+\justify
 \textbf{Problem Statement}
 Traditional bathroom renovation quotation processes are time-consuming, error-prone, and require extensive manual work by sales teams to measure spaces, select compatible products, verify installability, and calculate pricing. This inefficiency creates delays for customers and limits business scalability. The challenge was to develop an AI-powered system that automatically generates complete, accurate bathroom renovation quotes from LiDAR room scans captured via smartphone, eliminating manual measurement errors and reducing quote generation time from hours to minutes.
 
@@ -18,7 +18,7 @@ The developed prototype is a full-stack web application built on a modern techno
     \item \textbf{U-Form Configuration Algorithm:} Handles complex U-shaped installations requiring multiple doors and panels.
     \item \textbf{Walk-In Algorithm:} Recommends frameless walk-in shower solutions.
 \end{itemize}
-Each algorithm implements multi-stage filtering: strict width matching (minEinbau/maxEinbau ranges), extended tolerance matching (\pm50mm fallback), price range validation, and compatibility verification through a relationship graph connecting doors, side panels, and shower trays.
+Each algorithm implements multi-stage filtering: strict width matching (minEinbau/maxEinbau ranges), extended tolerance matching ($\pm$50mm fallback), price range validation, and compatibility verification through a relationship graph connecting doors, side panels, and shower trays.
 
 \textbf{Quote Generation Workflow:} Users select a scanned floor plan, which auto-fills measurements from detected fixtures. The system displays all available products matching the dimensional constraints, while the AI recommendation engine suggests the optimal combination within the specified price range. The final selection generates a structured bill of materials with itemized pricing, total calculations, and product specifications exportable as PDF and CSV formats.
 
@@ -35,5 +35,3 @@ Each algorithm implements multi-stage filtering: strict width matching (minEinba
 \textbf{Limitations and Future Work:} The current prototype relies on rule-based algorithms rather than machine learning models. Future enhancements could incorporate AI/ML techniques for predicting customer preferences based on historical selections, automated price optimization, and visual similarity matching. Integration with 3D visualization tools would enable customers to preview their bathroom design before finalizing the quote.
 
 The delivered prototype validates the feasibility of AI-assisted quote generation for bathroom renovations, providing a solid foundation for production deployment and demonstrating significant efficiency gains over traditional manual quotation processes.
-\par}
-\vspace{1cm}

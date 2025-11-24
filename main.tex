@@ -18,22 +18,81 @@
 % FRONT MATTER
 % -------------------
 % The title page content is in a separate file.
+% The title page itself is considered page I, but is unnumbered.
 \input{latex/01_titlepage.tex}
+\thispagestyle{empty} % Ensure no page number on the title page.
+
+% Blank page after title page, also unnumbered.
+\cleardoublepage
+\thispagestyle{empty}
+
+% Start Roman numbering from here. This page will be Roman I.
+\cleardoublepage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+% Ensure page numbering starts from I (Roman 1).
+
+% Add the confidentiality clause on a separate page
+\input{latex/01a_confidentiality_clause.tex}
+\addcontentsline{toc}{chapter}{Confidentiality Clause} % Add to ToC
+
+% Gender equality statement
+\input{latex/01b_gender_equality.tex}
+\addcontentsline{toc}{chapter}{Gender Equality Statement} % Add to ToC
 
 % The executive summary (or abstract) is in a separate file.
 \input{latex/02_executive_summary.tex}
+\addcontentsline{toc}{chapter}{Executive Summary}
+ % Add to ToC
 
 % Generate the Table of Contents
 \cleardoublepage
 \tableofcontents
 \cleardoublepage
 
+% List of Figures
+\addcontentsline{toc}{chapter}{List of Figures} % Add to ToC
+\listoffigures
+\cleardoublepage
+
+% List of Tables
+\addcontentsline{toc}{chapter}{List of Tables} % Add to ToC
+\listoftables
+\cleardoublepage
+
+% List of Abbreviations (Custom addition)
+\cleardoublepage
+\addcontentsline{toc}{chapter}{List of Abbreviations} % Add to ToC
+\chapter*{List of Abbreviations} % Unnumbered chapter
+% Placeholder content for List of Abbreviations
+\begin{itemize}
+    \item AI: Artificial Intelligence
+    \item API: Application Programming Interface
+    \item IoT: Internet of Things
+    \item iOS: iPhone Operating System
+    \item JSON: JavaScript Object Notation
+    \item LiDAR: Light Detection and Ranging
+    \item ORM: Object-Relational Mapping
+    \item PDF: Portable Document Format
+\end{itemize}
+\cleardoublepage
+
+% Preface (Custom addition)
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Preface} % Add to ToC
+\chapter*{Preface} % Unnumbered chapter
+% Placeholder content for Preface
+This thesis represents the culmination of extensive research and development in the field of LiDAR-based product recommendation systems, a project made possible through the support of Emc2. I would like to express my sincere gratitude to the company for providing me with this engaging topic and the necessary materials to bring it to fruition.
+
+I am especially grateful to my colleagues for their invaluable support. My special thanks go to [Name 1] from the IT department for her instrumental help with deployment, insightful ideas, and continuous feedback throughout the project lifecycle. I would also like to thank [Name 2] from the sales department, whose expertise in selection logic and constructive feedback were crucial for shaping the recommendation algorithms.
+\cleardoublepage
 
 % -------------------
 % MAIN CONTENT (CHAPTERS)
 % -------------------
 % Each chapter is included from the 'chapters' directory.
 % Using \include starts each chapter on a new page.
+\pagenumbering{arabic}
 \include{latex/03_chapters/01_introduction}
 \include{latex/03_chapters/02_system_requirements}
 \include{latex/03_chapters/03_lidar_integration}
@@ -53,8 +112,10 @@
 
 % The bibliography is printed here.
 \cleardoublepage
-\include{latex/03_chapters/09_bibliography}
+\printbibliography[heading=bibintoc, title={Bibliography}]
 
+% Declaration of Authenticity
+\input{latex/05_declaration.tex}
 
 \end{document}
 % -------------------

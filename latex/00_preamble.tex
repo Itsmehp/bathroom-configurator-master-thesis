@@ -4,18 +4,64 @@
 \usepackage{mathpazo}   % Palatino font
 \usepackage[T1]{fontenc}
 \usepackage{microtype}  % Better spacing and kerning
+\usepackage{setspace}   % For line spacing
+\onehalfspacing       % Set 1.5 line spacing
+\usepackage{ragged2e}   % For justified alignment
 
 % Page layout and margins
 \usepackage{geometry}
 \geometry{
-    top=3cm,
-    bottom=3cm,
-    left=3cm,
-    right=3cm
+    top=3.0cm,
+    bottom=3.0cm,
+    left=3.0cm,
+    right=2.0cm
+}
+
+% Header/Footer and page numbering customization
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[R]{\thepage} % Page number in top right
+\renewcommand{\headrulewidth}{0pt} % No header rule
+% Apply this style to plain pages (e.g., chapter beginnings) as well
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
 }
 
 % Section and title formatting
 \usepackage{titlesec}
+% Format for numbered chapters (Level 1) - \chapter
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\fontsize{16pt}{18pt}\selectfont}
+  {\chaptertitlename\ \thechapter}
+  {1em}
+  {}
+% Format for unnumbered chapters (e.g., Preface) - \chapter*
+\titleformat{name=\chapter,numberless}[block]
+  {\normalfont\bfseries\fontsize{16pt}{18pt}\selectfont\raggedright}
+  {}
+  {0pt}
+  {}
+% Format for sections (Level 2)
+\titleformat{\section}
+  {\normalfont\bfseries\fontsize{14pt}{16}\selectfont}
+  {\thesection}
+  {1em}
+  {}
+% Format for subsections (Level 3)
+\titleformat{\subsection}
+  {\normalfont\bfseries\fontsize{12pt}{14}\selectfont}
+  {\thesubsection}
+  {1em}
+  {}
+% Format for subsubsections (Level 4)
+\titleformat{\subsubsection}
+  {\normalfont\bfseries\fontsize{12pt}{14}\selectfont}
+  {\thesubsubsection}
+  {1em}
+  {}
 
 % For the Confidentiality Clause box or other framed text
 \usepackage{framed}
@@ -23,5 +69,12 @@
 % For including graphics
 \usepackage{graphicx}
 
+% Customize table of contents
+\usepackage{tocloft}
+\setcounter{tocdepth}{3} % Include up to subsubsection in ToC
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % Dots for chapters
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}   % Dots for sections
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}% Dots for subsections
+\renewcommand{\contentsname}{Table of Contents} % Set the title of the Table of Contents
 % Add biblatex for modern bibliography management
 \usepackage[backend=biber, style=numeric, sorting=none]{biblatex}

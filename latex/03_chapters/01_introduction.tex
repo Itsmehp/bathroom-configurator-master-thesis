@@ -1,4 +1,103 @@
 % Chapter 1: Introduction
 \chapter{Introduction}
+\label{chap:Introduction}
 
-% Content for this chapter goes here.
+The integration of advanced digital technologies, such as Artificial Intelligence, the Internet of Things, and high-precision sensor systems like LiDAR, is rapidly transforming traditional industries. The construction and home renovation sector, long characterized by its reliance on manual processes, is increasingly seeking innovative solutions to enhance efficiency, reduce costs, and improve customer satisfaction in a competitive and evolving market \cite{musaratSystematicReviewEnhancement2023, wongDigitalTransformationBuilding2025}. This digitalization trend is applicable in specialized segments, such as bathroom renovations, where accurate measurements and precise product matching are paramount for successful project execution and client satisfaction.
+
+Despite the advancements in data capture technologies, significant operational inefficiencies persist within the bathroom renovation industry, particularly concerning the process of specifying, quoting, and recommending suitable products, such as shower enclosures. The current workflows are often characterized by time-consuming manual measurements, subjective product selection based on limited on-site visualization, and a disjointed customer journey \footnote{Internal Company Review, 2025 (data gathered from company members via Google Sheets)}. These challenges not only impede business scalability and profitability but also expose projects to considerable risks of inaccuracy, leading to financial losses and diminished customer trust.
+
+This Master's Thesis addresses these critical industry pain points by proposing and developing a novel LiDAR-based product recommendation system specifically tailored for shower enclosures. By leveraging precise spatial data acquired through modern LiDAR sensors and integrating intelligent algorithms, this research aims to automate and optimize the product selection and quotation process. The objective is to significantly reduce the operational overhead for renovation businesses while simultaneously enriching the customer experience through accurate, real-time visualization and product matching. The subsequent sections of this chapter will detail the specific problem statement, the overarching purpose and objectives of this thesis, its defined scope, and provide an outline of the thesis structure.
+
+\section{Problem Statement}
+\label{sec:ProblemStatement}
+
+The process of specifying and quoting shower enclosures within the bathroom renovation industry is characterized by significant operational inefficiencies that impede scalability, negatively impact profitability, and diminish the overall customer experience. As renovation companies expand their geographic service areas to a growing customer base, these challenges are exacerbated. The core problems can be categorized as follows:
+
+\subsection{Operational Inefficiencies in Manual Quoting}
+ The conventional workflow for generating a customer quotation is a manually intensive and time-consuming process. A single customer engagement requires a sales representative to invest substantial time across several stages:
+\begin{itemize}
+    \item \textbf{Travel Time:} Approximately one to three hours are often dedicated solely to traveling to and from the customer's location.
+    \item \textbf{On-Site Assessment:} The assessment itself, which involves the meticulous measurement and documentation of the bathroom space, consumes an additional hour of a representative's time.
+    \item \textbf{Manual Office Work:} Following the on-site visit, the representative must return to the office to manually calculate costs, prepare a detailed quotation, and select suitable shower enclosures. This selection is frequently constrained by the customer's remaining budget after accounting for labor and other materials, adding a further layer of complexity.
+\end{itemize}
+This multi-stage, manual process creates a significant operational bottleneck, limiting the number of quotations a single representative can handle and thereby directly constraining business growth.
+
+\subsection{The Challenge of On-Site Product Configuration}
+A critical gap exists in the current workflow: the lack of intelligent, on-site product configuration. While some software solutions are emerging to digitize parts of the quoting process, they do not address the complex task of selecting a compatible and appropriate shower enclosure in real-time. This is a non-trivial step that depends on precise measurements, the layout of existing bathroom fixtures, and the customer's budget. As a result, it remains a task that is largely manual and disconnected from the rest of the quoting workflow.
+
+\subsection{Risk of Inaccuracy and Financial Loss}
+Manual data collection and product selection are inherently prone to human error. Incorrect measurements or the selection of incompatible components can lead to ordering custom-fit products that are unsuitable for the space. Such errors often result in:
+\begin{itemize}
+    \item \textbf{Direct Financial Loss:} Custom-ordered products are typically non-returnable, leading to sunk costs.
+    \item \textbf{Project Delays:} Re-ordering components and adjusting plans causes significant delays.
+    \item \textbf{Erosion of Customer Trust:} Errors in the quoting and ordering phase can severely damage the company's reputation and customer confidence.
+\end{itemize}
+
+\subsection{Sub-optimal Customer Experience}
+The traditional process results in a fragmented and protracted customer journey. A long delay between the initial on-site visit and the receipt of a final, detailed quote can lead to customer disengagement. Furthermore, the customer is unable to visualize the proposed products within their own space, creating a potential mismatch between expectation and reality. This highlights the need for a more immediate and integrated solution to enhance the customer experience.
+
+\subsection{Conclusion: A Timely Opportunity for Innovation}
+While these challenges are long-standing within the bathroom renovation sector, the recent integration of consumer-grade LiDAR sensors into common devices, such as smartphones and tablets, presents a novel and timely opportunity to address these inefficiencies comprehensively especially for growing businesses that cannot rely on slow customer engagement.
+
+\section{Purpose and Objectives}
+\label{sec:PurposeAndObjectives}
+
+The principal objective of this thesis is to address the inefficiencies inherent in the manual quotation process for bathroom renovations by developing a functional prototype that automates the selection of shower enclosures. This study seeks to substantially reduce the time required by sales teams to produce accurate quotations and to enhance the customer experience by surpassing the limitations of current, non-integrated configurator tools.
+
+To accomplish this, the project will focus on the following key objectives:
+\begin{enumerate}
+    \item \textbf{Develop an Intelligent Recommendation Engine:} The core of the project is to create a system that can intelligently select optimal shower enclosures. This involves:
+        \begin{itemize}
+            \item Designing and implementing intelligent product-matching algorithms for various shower configurations.
+            \item Creating a comprehensive product database that models product specifications and compatibility rules.
+        \end{itemize}
+    \item \textbf{Integrate Modern Data Capture Methods:} To ensure accurate recommendations, the system will utilize precise measurements. This will be achieved by:
+        \begin{itemize}
+            \item Designing a data integration pipeline to process room dimensions captured by the MagicPlan app using LiDAR technology.
+            \item Allowing for manual user input as an alternative for customers with existing floor plans.
+        \end{itemize}
+    \item \textbf{Deliver Actionable Output:} The final recommendations must be usable for the sales process. The prototype will therefore:
+        \begin{itemize}
+            \item Generate output in a structured format (such as JSON or PDF) to support quotation generation and integration with other software.
+        \end{itemize}
+\end{enumerate}
+
+\section{Scope of the Thesis}
+\label{sec:ScopeOfTheThesis}
+
+The scope of this master's thesis is precisely delineated to facilitate the successful development of a functional prototype within a constrained timeframe. The following boundaries define the project's focus:
+
+\subsection{Market and Geographical Scope}
+This study is exclusively oriented towards the German market. This emphasis guides the selection of products as well as the business logic underlying pricing and quotation processes. Although the system architecture is designed to be adaptable, the initial product database, supplier integration, and rule-based algorithms are specifically developed to align with the context of bathroom renovation practices in Germany. The adaptation of the system for other international markets is explicitly considered beyond the scope of this research.
+
+\subsection{Product and Functional Scope}
+The primary function of the system is to provide recommendations for common upgrade scenarios, including:
+\begin{itemize}
+    \item Replacement of existing shower enclosures
+    \item Conversion of bathtubs into standalone showers
+\end{itemize}
+Accordingly, the product database and recommendation algorithms concentrate on shower doors, shower side panels, and shower trays. Other components typically involved in comprehensive bathroom renovations, such as lighting, tiling, sinks, or toilets, are deliberately excluded from this study; however, the underlying database structure is designed to allow these categories to be added with minimal effort.
+
+\subsection{Technical and Implementation Constraints}
+The project is scoped as the development of a full-stack web application prototype. The technical implementation is limited to the following technology stack:
+\begin{itemize}
+    \item \textbf{Frontend:} Next.js with TypeScript
+    \item \textbf{Backend:} Express.js with TypeScript
+    - \textbf{Database:} PostgreSQL with Prisma ORM
+\end{itemize}
+Regarding data acquisition, the system is designed to operate exclusively with room scan data obtained from iOS devices equipped with LiDAR sensors or iOS devices connected to a Bluetooth LiDAR sensor via the MagicPlan API. The development of native applications for Android or other platforms falls outside the scope of this thesis. Although access to the partner’s product database was provided, it lacked integration capabilities or usable APIs. Consequently, the thesis includes the creation of a dedicated product catalog and database through approved data extraction from the partner’s system. To support maintainability and ensure up-to-date pricing and product information, additional automated scripts were developed to periodically scrape price data and update the database, as well as a script capable of adding new products directly by retrieving all relevant information from the partner’s website using a model number as input.
+
+\section{Thesis Structure}
+\label{sec:ThesisStructure}
+
+This thesis is structured to systematically address the research problem and objectives, guiding the reader through the development and evaluation of the proposed LiDAR-based product recommendation system. Each chapter builds upon the previous one, culminating in a comprehensive analysis of the findings and future directions. The chapters are outlined as follows:
+
+\begin{itemize}
+    \item \textbf{Chapter 2: System Requirements and Architecture Designing} delves into the detailed functional and non-functional requirements, presents the system architecture, and details the data model design.
+    \item \textbf{Chapter 3: LiDAR Integration} focuses on the data acquisition pipeline from the MagicPlan API and the methodologies for fixture recognition.
+    \item \textbf{Chapter 4: Intelligent Product Recommendation Algorithm} describes the design and implementation of the rule-based and graph-based matching algorithms.
+    \item \textbf{Chapter 5: System Implementation} details the practical development of the full-stack web application prototype.
+    \item \textbf{Chapter 6: Testing and Evaluation} presents the methodology and results from the system's performance, accuracy, and usability testing.
+    \item \textbf{Chapter 7: Discussion of Findings} interprets the evaluation results, critically assesses the system's effectiveness, and compares it with existing solutions.
+    \item \textbf{Chapter 8: Conclusion} summarizes the key findings, discusses the limitations of the study, and proposes directions for future work.
+\end{itemize}

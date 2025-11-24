@@ -1,6 +1,6 @@
 # Front Matter
 
-- [ ] Title Page, Confidentiality Clause, Executive Summary (2–3 pages), Table of Contents
+- [x] Title Page, Confidentiality Clause, Executive Summary (2–3 pages), Table of Contents
 - [ ] List of Figures
 - [ ] List of Tables
 - [ ] List of Abbreviations

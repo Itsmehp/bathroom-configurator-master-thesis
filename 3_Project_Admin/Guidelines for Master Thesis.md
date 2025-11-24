@@ -1,4 +1,4 @@
-# 2. Formal Guidelines
+000gas# 2. Formal Guidelines
 
 ### Contents of a Master Thesis
 A master thesis includes the following sections in order:
