@@ -8,7 +8,6 @@
 GEMINI.md
 
 # Build artifacts and temporary files
-*.pdf
 *.docx
 
 # Project Admin files that are not part of the thesis
