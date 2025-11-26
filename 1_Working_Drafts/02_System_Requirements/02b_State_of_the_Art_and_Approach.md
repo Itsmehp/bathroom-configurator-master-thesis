@@ -1,8 +1,8 @@
-## 2.3 State of the Art and Approach
+## 2.2 State of the Art and Approach
 
 This chapter reviews the state-of-the-art in technologies relevant to this thesis, beginning with an analysis of LiDAR scanning applications for interior mapping. It then examines existing product recommendation and configuration systems to identify the current technological gaps, and finally, outlines the methodological approach adopted to address these gaps. The review begins with LiDAR technology, which was initially developed for terrain mapping in aeronautics and aerospace applications. It has since expanded into diverse domains such as autonomous vehicles, enabling these systems to navigate their environments effectively and generate three-dimensional imagery that can be transformed into Building Information Modeling (BIM) or Computer-Aided Design (CAD) models. [Lidar Technology: A Comprehensive Review and Future Prospects]
 
-### 2.3.1 Introduction of LiDAR in edge devices
+### 2.2.1 Introduction of LiDAR in edge devices
 
 
 Owing to significant advances in laser diode technology, optics, and manufacturing, LiDAR systems have become smaller, more accessible, and cost-effective. [CITE SOURCE HERE] This miniaturization has paved the way for the integration of LiDAR into edge devices, a trend most prominently exemplified by its inclusion in consumer smartphones like the Apple iPhone Pro series and iPad Pro series. The presence of LiDAR in these devices has significantly broadened public access to sophisticated spatial scanning capabilities.
@@ -15,13 +15,13 @@ These sensors enable the creation of precise three-dimensional visualizations th
 
 The improved LiDAR scanner in devices like the iPad Pro and iPhone 12 Pro, coupled with specialized floor plan applications, significantly enhances accuracy in room dimensions and allows for the inclusion of richer detail in floor plans \cite{geibWhyApplesLiDAR}. This integration facilitates advanced visualization, web-based uploading of 2D floor plans and 3D models, and seamless information sharing. Critically, this technology can boost client acquisition through innovative engagement, serve as a basis for rapid material and cost estimates during initial site visits, and bolster quality assurance by enabling comparisons of renovation stages. The capacity to proactively detect errors and compare planned versus actual progress positions LiDAR room scans as invaluable, cost-saving roadmaps within the residential construction sector \cite{geibWhyApplesLiDAR}.  
 
-### 2.3.2 Analysis of the Incumbent Product Configurator
+### 2.2.2 Analysis of the Incumbent Product Configurator
 
 While MagicPlan addresses spatial data acquisition, the second component of the established workflow is a manufacturer-provided, web-based product configurator. This section provides a state-of-the-art analysis of this incumbent tool, identifying the specific technical and functional limitations that are the root cause of the business and operational inefficiencies outlined in the Problem Statement. This tool, hosted on a B2B wholesale portal, is the primary instrument for specifying and ordering compatible shower enclosure components.
 
 The configurator guides users through a hierarchical selection process to ensure component compatibility. It allows for the definition of several key parameters, such as:
-*   **Entry Type:** Including corner entry (*Eckeinstieg*), niche (*Nische*), walk-in, and U-form configurations.
-*   **Shower Style:** Such as a corner cabin (*Eckkabine*) or a corner entry with a full or shortened side wall.
+*   **Entry Type:** Including corner shower (*Ecklösung*), alcove shower (*Nischenlösung*), walk-in shower (only 1 side-panel / door other side empty), and U-form configurations(multiple options 1 door 2 sidepanel, 2 doors, 1 sidepanel, 2 doors 2 sidepanels, half-circle(not-used)).
+*   **Shower Style:** Such as a corner cabin (*Eckkabine*) or a corner entry with a full or shortened side panel (Only when there is a short sidewall present or a bathtub is beside the shower).
 *   **Door Type:** Options include swing doors (*Pendeltür*), folding swing doors (*Faltpendeltür*), and sliding doors (*Gleittür*).
 *   **Installation Details:** Including orientation and mounting type (floor-level or on a shower tray).
 
