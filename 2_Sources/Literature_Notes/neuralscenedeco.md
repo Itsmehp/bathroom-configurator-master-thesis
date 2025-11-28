@@ -1,0 +1,1 @@
+The author gives a photograp of indoor space and list of decorations and tries to synthesize a new image of the same space with desired finishing and decorations. making it simple to apply or create conceptual interior designs in a simple yet effective manner.

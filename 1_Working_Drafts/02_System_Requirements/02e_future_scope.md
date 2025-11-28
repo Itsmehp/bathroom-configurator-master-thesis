@@ -4,7 +4,7 @@ The application is built with technologies that scale well with changes. It is u
 
 ## 2.5.1 Intelligent Shower Type Recommendation Based on User History
 
-Currently, the system enables users to manually select shower configurations based on their requirements. However, a more advanced version could implement automated recommendations by analyzing previous selections and applying rule-based logic. This enhancement would consider the following factors:
+Currently, the system enables users to manually select shower configurations based on their requirements. However, a more advanced version could implement automated recommendations by analyzing previous selections and applying rule-based logic [mangiliBayesianApproachConversational2020]. This enhancement would consider the following factors:
 
 - The customer's preference to transition from old shower to new shower
 - Dimensional and location consistency with previously selected showers
@@ -22,21 +22,21 @@ Artificial intelligence could further personalize recommendations by incorporati
 
 ## 2.5.3 Machine Learning-Based Bathroom Layout Optimization
 
-The current spatial analysis approach could be enhanced through machine learning techniques trained on multiple floor plans. With sufficient training data, the system could predict optimal fixture placement within bathroom spaces or employ reinforcement learning methods that reward effective spatial arrangements.
+The current spatial analysis approach could be enhanced through machine learning techniques trained on multiple floor plans. With sufficient training data, the system could predict optimal fixture placement within bathroom spaces or employ reinforcement learning methods that reward effective spatial arrangements [diDeepReinforcementLearning2021].
 
-However, this approach faces several limitations. Bathroom designs vary significantly across buildings due to structural differences, making training effective only for homogeneous datasets where variations are limited to room size, door position, and window location. Additionally, the data provided by floor plan APIs often presents preprocessing challenges. Specifically, the API returns coordinates for external walls but not internal walls, and fixtures are represented by a single center point and dimensions, creating significant data misalignment that requires extensive preparation before analysis can begin.
+However, this approach faces several limitations. Bathroom designs vary significantly across buildings due to structural differences, making training effective only for homogeneous datasets where variations are limited to room size, door position, and window location [diDeepReinforcementLearning2021]. Additionally, the data provided by floor plan APIs often presents preprocessing challenges. Specifically, the API returns coordinates for external walls but not internal walls, and fixtures are represented by a single center point and dimensions, creating significant data misalignment that requires extensive preparation before analysis can begin.
 
 Furthermore, the floor plan software sometimes produces inaccurate results—such as placing fixtures outside the defined room boundaries without creating appropriate enclosures, or failing to correctly align walls to 90-degree angles despite the actual measurements being perpendicular. These technical limitations must be addressed before this enhancement can be reliably implemented.
 
-## 2.5.4 Generative AI for Visual Bathroom Previews
+## 2.5.4 Visual Previews via Generative AI and Diffusion Models
 
-Generative AI could enable customers to visualize proposed bathroom designs by processing photographs taken at appropriate angles. While this represents a straightforward technical implementation in principle, several practical barriers currently prevent its deployment.
+Currently there are two popular approaches for image generation and image editing: Generative Adversarial Networks [goodfellowGenerativeAdversarialNets2014] and Diffusion Models [hoDenoisingDiffusionProbabilistic2020]. Furthermore, Diffusion models for their capacity to generate high quality, photorealistic images. Their effective integration with Large Language Models (LLMs) also facilitates the straightforward translation of a user's textual ideas into visual concepts, as demonstrated by systems like VIDES [leVIDESVirtualInterior2023].
 
-The system requires end-to-end operation where all necessary data is automatically retrieved rather than manually entered by users. Additionally, the current product database contains limited imagery—typically only one or two images per product—which would challenge any generative model attempting to create varied and realistic renderings. These constraints must be resolved before this feature can be effectively implemented.
+Diffusion models with editing capabilities could enable customers to visualize proposed bathroom designs by processing photographs taken at appropriate angles. However, two significant practical barriers currently prevent its deployment. First, a primary challenge lies in workflow integration. The existing system is optimized for rapid, automated quote generation. Introducing a manual step, such as requiring user input to select a specific area in an image, would add latency and hinder this core function. This suggests the feature might be better suited for optional, high-end design services rather than for immediate quoting.
+
+Second, a more fundamental technical barrier is data scarcity. The product database contains limited visual assets—typically only one or two promotional images and basic CAD-style line drawings per product. This lack of diverse, high-fidelity imagery would severely challenge the ability of any generative model to produce varied and realistic renderings of the products within a new scene.
 
 ## 2.5.5 Intelligent Chatbot Assistant for Budget-Conscious Recommendations
 
-A chatbot interface could provide intelligent suggestions when a recommended shower configuration exceeds the customer's budget. The system could strategically suggest modifications—such as reducing width or depth—while maintaining aesthetic coherence and functionality. This would help customers find solutions that balance their financial constraints with their design preferences. 
-
-
+A chatbot interface could provide intelligent suggestions when a recommended shower configuration exceeds the customer's budget. The system could strategically suggest modifications—such as reducing width or depth—while maintaining aesthetic coherence and functionality. This would help customers find solutions that balance their financial constraints with their design preferences [sunConversationalRecommenderSystem2018]. 
 

@@ -8,16 +8,16 @@ An analysis of the company's internal processes revealed significant inefficienc
 
 ### 2.1.1.1 Challenges with Legacy Commercial Software
 
-The primary software used for quote generation was "HERO Software"[^1], a comprehensive but overly complex tool for the company's specific needs. Based on feedback from the sales department, two main issues were identified:
+The primary software used for quote generation was "HERO Software"[AlleFeaturesHERO], a comprehensive but overly complex tool for the company's specific needs. Based on feedback from the sales department, two main issues were identified:
 
-1.  **High Usability Barriers**: The software's interface was not intuitive for sales personnel, often requiring intervention from the IT department to configure quote templates and calculation parameters.(add footnote reference)
+1.  **High Usability Barriers**: The software's interface was not intuitive for sales personnel, often requiring intervention from the IT department to configure quote templates and calculation parameters.(add footnote reference review from sales team)
 2.  **Requirement of Expert Knowledge**: Effective use of the configurator demanded deep expertise in construction details (e.g., gutter placement, faucet location). This dependency led to a steep learning curve and a high probability of errors, especially for new employees.
 
 Furthermore, the software's high licensing costs posed a significant financial burden, especially since many of its features, designed for general construction, were rarely used by the company.(footnote reference)
 
 ### 2.1.1.2 Limitations of the Subsequent In-House Solution
 
-To address these issues, a simpler, more user-friendly application was developed internally using JavaScript. While this application improved usability, it introduced a different problem: it lacked intelligent filtering capabilities. The sales team still could not automatically select or recommend shower enclosures based on critical parameters such as:
+To address these issues, a simpler, more user-friendly application called "Angeboteskonfigurator" or "Offer Configurator" was developed internally using JavaScript. While this application improved usability, it introduced a different problem: it lacked intelligent filtering capabilities. The sales team still could not automatically select or recommend shower enclosures based on critical parameters such as:
 
 -   Dimensions (width, depth, height)
 -   Shower construction style (e.g., niche, corner entry, walk-in)
@@ -33,7 +33,9 @@ Although the website offered a configurator, developed by the manufacturer of th
 
 ### 2.1.1.4 Traditional Sales Process
 
-Traditional sales process were really basic. An A4 size printed product selector was used by the sales team during initial consultation, which was inefficient, as at the end of the day they need to copy these requirements into the above mentioned configurator and select a shower enclosure which would be inside customer's price range after removing the quote that is generated before selecting a shower enclosure plus they also have to account for profit as the main source of it is shower enclosures. The printout was 6 pages long with different options to select without any product images and would just show shower types and door opening types.
+The company's most traditional sales process was rudimentary and highly manual, relying on a six-page A4-sized printed questionnaire and product selector during initial customer consultations. This document, which lacked product images and only listed basic shower and door types, was the source of significant operational inefficiency.
+
+The workflow required sales staff to manually transcribe customer requirements from the paper form into a digital configurator. Subsequently, they had to select a suitable shower enclosure while performing multi-step calculations to align the final price with the customer's budget. This involved accounting for the company's profit margin, which is primarily derived from the material price of shower enclosures, making the calculation both critical and prone to error. The process was cumbersome and inefficient, significantly increasing the time required to generate accurate quote.
 ## 2.1.2 System Requirements
 
 Based on the analysis of the existing problems, the following functional and non-functional requirements have been defined for the new system.

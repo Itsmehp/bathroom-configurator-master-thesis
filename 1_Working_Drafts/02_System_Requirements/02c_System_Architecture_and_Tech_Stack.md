@@ -33,7 +33,7 @@ The technological stack was chosen to provide a reliable, up-to-date, and mainta
 
 -   **Backend (Express.js & TypeScript):** To provide the adaptable and potent RESTful API that the existing system lacked, Express.js, a simple web framework for Node.js, was chosen. Because of its unbiased nature, the API structure can be specifically designed to meet the objectives of this project. For the API endpoints, TypeScript guarantees consistency and concise documentation.
 
--   **Database (PostgreSQL):** PostgreSQL, an open-source object-relational database system (ORDBMS), was selected due to its resilience, ACID compliance, and dependable support for complex queries and data interactions [Cite makrisMongoDBVsPostgreSQL2021]. This is necessary to enable features like shower tray recommendations and to mimic the complex compatibility requirements between various shower enclosure components (doors, side panels, etc.).
+-   **Database (PostgreSQL):** PostgreSQL, an open-source object-relational database system (ORDBMS), was selected due to its resilience, ACID compliance, and dependable support for complex queries and data interactions [makrisMongoDBVsPostgreSQL2021]. This is necessary to enable features like shower tray recommendations and to mimic the complex compatibility requirements between various shower enclosure components (doors, side panels, etc.).
 
 -   **Automation (Python):** Because Python has a large ecosystem of libraries for data manipulation and web scraping (like Selenium), it was chosen for the backend automation and data scraping chores. By maintaining the product catalog and pricing data up to date, this option immediately supports the automated jobs that address the "Outdated Product Data" and "No Real-Time Price Visibility" issues.
 

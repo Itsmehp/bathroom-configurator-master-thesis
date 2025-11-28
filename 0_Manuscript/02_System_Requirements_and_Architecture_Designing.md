@@ -1,6 +1,6 @@
 # System Requirements and Architecture Designing
 
-The successful development of such an application requires meticulously defined sed of requirements and a robust architectural design. For a system that requires accurate real-world data, precise measurements of fixtures, comprehensive database of products with precise measurements and business logic that gets used while selection process of a shower enclosure, this foundation phase is particularly critical. It ensures the implementation is not only technologically sound but also directly aligned with the user needs and business objectives.
+The successful development of such an application requires meticulously defined set of requirements and a robust architectural design. For a system that requires accurate real-world data, precise measurements of fixtures, comprehensive database of products with precise measurements and business logic that gets used while selection process of a shower enclosure, this foundation phase is particularly critical. It ensures the implementation is not only technologically sound but also directly aligned with the user needs and business objectives.
 
 The transition from a conceptual framework to a functional software requires a systematic approach to defining the system's intended behavior, constraints, and underlying structure. This chapter delineates the complete process of designing the LiDAR-based product recommendation system, beginning with a thorough analysis of functional and non functional requirements.
 

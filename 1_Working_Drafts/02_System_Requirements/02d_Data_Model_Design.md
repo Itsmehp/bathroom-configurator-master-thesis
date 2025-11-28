@@ -1,9 +1,9 @@
 
 # 2.4 Data Model Design
 
-The product recommendation system's accuracy, performance, and future scalability are all directly impacted by a solid and scalable data model [cite Improving database design through the analysis of relationship]. The PostgreSQL database schema, which is designed to effectively process and store complex spatial data from LiDAR scans, manage a multifaceted product catalog, store user data for authentication, complex product relationships, and customer data for automation, is described in detail in this section. The main objective is to develop a logical framework that makes it easier to do the intricate queries needed by the rule-based and graph-based recommendation algorithms.
+The product recommendation system's accuracy, performance, and future scalability are all directly impacted by a solid and scalable data model [10.1145/331983.331984]. The PostgreSQL database schema, which is designed to effectively process and store complex spatial data from LiDAR scans, manage a multifaceted product catalog, store user data for authentication, complex product relationships, and customer data for automation, is described in detail in this section. The main objective is to develop a logical framework that makes it easier to do the intricate queries needed by the rule-based and graph-based recommendation algorithms.
 
-PostgreSQL was selected over MongoDB primarily because of its superior response time, which is essential when querying for a combination in products database; its ability to reduce overall dataset storage size, which is crucial for lowering hosting service costs for the company; and its reliable and automated backup management, which is offered as an option with many well-known hosting services. [cite makrisMongoDBVsPostgreSQL2021]
+PostgreSQL was selected over MongoDB primarily because of its superior response time, which is essential when querying for a combination in products database; its ability to reduce overall dataset storage size, which is crucial for lowering hosting service costs for the company; and its reliable and automated backup management, which is offered as an option with many well-known hosting services. [makrisMongoDBVsPostgreSQL2021]
 
 ### 2.4.1 Core Data Entities and Their Relationships
 

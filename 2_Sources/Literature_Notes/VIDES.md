@@ -1,0 +1,1 @@
+According to this research There are two popular approaches for image generation and image editing: GAns and Diffusion models. [Cite] GANs are proven to have high fideleity image synthesis and fast inference speeds. Diffusion models offer the advantage in generating high quality and more realistic images. Diffusion models are considered superior to GANs by the author.
