@@ -4,7 +4,7 @@ The successful acquisition of accurate spatial data is the foundational step upo
 
 ### 3.2.1 API Endpoint Analysis
 
-The system interacts with two principal RESTful endpoints provided by the MagicPlan API to retrieve user-specific plan data:
+The system interacts with two principal RESTful endpoints provided by the MagicPlan API to retrieve user-specific plan data \cite{MagicplanCloudAPI}:
 
 1.  **`GET /plans`**: This endpoint retrieves a paginated list of all plans associated with a user's account. Each item in the response provides summary data, including the unique `planId`, the project it belongs to, its name, and a `thumbnailUrl`. The `planId` and `thumbnailUrl` are used in the frontend application to allow the user to visually select which bathroom plan they wish to configure.
 
@@ -23,15 +23,24 @@ For each room, the most crucial element is the `fixtures` array. Each object wit
 
 ### 3.2.3 Data Extraction and Transformation
 
-Due to the large size and complexity of the JSON response, a multi-step data extraction and transformation process was implemented to parse the raw data and map it to the system's database schema.
+Due to the large size and complexity of the JSON response, a multi-step data extraction and transformation process was implemented to parse the raw data and map it to the system's database schema. The high-level process is as follows:
 
-The process is as follows:
 1.  **Request and Parse:** The backend sends a request to the `GET /plans/{planId}` endpoint and parses the resulting JSON string into a programmable object.
-2.  **Iterate and Filter:** The system iterates through the `rooms` array and, for each room, subsequently iterates through its `fixtures` array. During this stage, only fixtures relevant to the bathroom renovation context (e.g., doors, windows, existing shower structures) are selected, while irrelevant objects (e.g., decorative furniture) are ignored.
-3.  **Map to Database Schema:** The attributes from each relevant fixture object are then mapped to the corresponding columns in the database. For instance, the `symbolName` from the API is mapped to the `name` column in the `Fixtures` table.
-4.  **Store Spatial Data:** The precise positional and dimensional data (e.g., `x`, `y`, `width`, `height`, `depth`, `angle`) is crucial for future spatial analysis and potential 3D visualization. To maintain flexibility, this granular data is collected into a JSON object and stored in a single `extrainfo` column in the `Fixtures` table. This approach avoids cluttering the main table with numerous columns and allows the data structure to evolve without requiring schema migrations.
+2.  **Iterate and Filter:** The system iterates through the `rooms` array and, for each room, subsequently iterates through its `fixtures` array. During this stage, only fixtures relevant to the bathroom renovation context are selected.
+3.  **Map to Database Schema:** The attributes from each relevant fixture object are then mapped to the corresponding columns in the database.
+4.  **Store Spatial Data:** The precise positional and dimensional data is collected into a JSON object and stored in a single `extrainfo` column in the `Fixtures` table for flexibility.
 
-This structured extraction process ensures that only necessary and clean data is persisted, making subsequent queries by the recommendation engine efficient and reliable.
+#### Extraction Logic Overview
+
+A detailed review of the data extraction logic, as illustrated in the flowcharts (see Appendix X), reveals a more nuanced process:
+
+1.  **Hybrid Data Parsing (JSON and XML):** While most plan data is parsed from the main JSON object, the most accurate room area measurements are found within an embedded XML string at `data.data.plan_detail.magicplan_format_xml`. A dedicated function, `extractFloorAreasFromMagicplanXml`, parses this XML to create an indexed array of floor areas.
+
+2.  **Area Assignment with Fallback:** When processing each room, the system first attempts to assign the area from the XML-derived `floorAreas` array. If a valid area is not found at the corresponding index, a fallback mechanism is triggered, which uses the `area_with_interior_walls_only` value from the room's JSON object. This ensures data robustness.
+
+3.  **Consolidated Fixture Processing:** The raw data does not contain a single, unified `fixtures` array. Instead, objects are separated into distinct `furnitures` and `wall_items` arrays. The extraction process iterates through both arrays independently, maps their respective properties (e.g., `symbol.name`, `size.x`) to a standardized fixture format, and then consolidates them into a single `fixtures` array for each cleaned room object.
+
+This multi-step, hybrid approach is necessary to handle the specific idiosyncrasies of the MagicPlan API response and to construct a clean, reliable data model for the recommendation engine.
 
 ---
 
@@ -39,19 +48,16 @@ This structured extraction process ensures that only necessary and clean data is
 
 To make this section comprehensive for a Master's Thesis, you should add the following details:
 
-1.  **Algorithmic Pseudo-code:** Provide a pseudo-code block that formally describes the data extraction and filtering algorithm. This will clearly illustrate the logic for iterating through the JSON and selecting relevant fixtures.
+1.  **Algorithmic Pseudo-code:** Provide pseudo-code for the main `extractPlanData` function. This should include the logic for calling the `extractFloorAreasFromMagicplanXml` helper function and the loops for processing `furnitures` and `wall_items`.
 
-2.  **Detailed Error Handling:** How does the system handle potential issues?
-    -   What happens if the API call fails or returns a non-200 status code?
-    -   How does the parser handle a malformed or incomplete JSON response?
-    *   What if the `exploded` or `fixtures` keys are missing from the data?
+2.  **XML Parsing Details:** Briefly explain the implementation of the `extractFloorAreasFromMagicplanXml` function. What library was used for XML parsing (e.g., `fast-xml-parser`), and how does it navigate the XML structure to find the area values?
 
-3.  **Data Cleaning Specifics:** You mentioned that the data requires "extensive cleaning." Provide concrete examples.
-    *   Are there inconsistencies in `symbolName` that need to be normalized?
-    *   Do you perform any validation on the dimension values (e.g., ensuring they are positive numbers)?
+3.  **Detailed Error Handling:** How does the system handle potential issues within the extraction logic?
+    -   What happens if the `magicplan_format_xml` string is missing or malformed?
+    -   How does the system react if `furnitures` or `wall_items` arrays are missing or empty?
 
-4.  **Performance Considerations:** Discuss the performance implications of processing such large JSON files.
-    *   Did you evaluate different JSON parsing libraries for efficiency?
-    *   How long does the extraction process take on average, and does it impact user experience?
+4.  **Data Cleaning Specifics:** Provide concrete examples of data cleaning performed during the mapping process.
+    -   How are `symbol.name` values normalized (e.g., trimming whitespace, standardizing capitalization)?
+    -   Is there validation to ensure that `size.x`, `size.y`, and `size.z` are valid numbers before they are mapped to width, depth, and height?
 
-5.  **A Visual Diagram:** A simple flow chart illustrating the data flow from `MagicPlan API` -> `Backend Extraction Service` -> `PostgreSQL Database` would significantly improve clarity.
+5.  **A Visual Diagram:** A simple flow chart illustrating the data flow from `MagicPlan API` -> `Backend Extraction Service` -> `PostgreSQL Database` would significantly improve clarity. The flowcharts you created in `4_Reference_Material/Flowcharts/` are an excellent source for this.
