@@ -4,7 +4,7 @@ This chapter outlines the analysis of the existing system's shortcomings and def
 
 ## 2.1.1 Problem Statement and Background
 
-An analysis of the company's internal processes revealed significant inefficiencies in the existing workflow for generating quotes for shower enclosures. These challenges stem from the limitations of previously used software solutions.(footnotes reference from company)
+An analysis of the company's internal processes revealed significant inefficiencies in the existing workflow for generating quotes for shower enclosures. These challenges stem from the limitations of previously used software solutions.
 
 ### 2.1.1.1 Challenges with Legacy Commercial Software
 
@@ -13,7 +13,7 @@ The primary software used for quote generation was "HERO Software"[AlleFeaturesH
 1.  **High Usability Barriers**: The software's interface was not intuitive for sales personnel, often requiring intervention from the IT department to configure quote templates and calculation parameters.(add footnote reference review from sales team)
 2.  **Requirement of Expert Knowledge**: Effective use of the configurator demanded deep expertise in construction details (e.g., gutter placement, faucet location). This dependency led to a steep learning curve and a high probability of errors, especially for new employees.
 
-Furthermore, the software's high licensing costs posed a significant financial burden, especially since many of its features, designed for general construction, were rarely used by the company.(footnote reference)
+Furthermore, the software's high licensing costs posed a significant financial burden, especially since many of its features, designed for general construction, were rarely used by the company.
 
 ### 2.1.1.2 Limitations of the Subsequent In-House Solution
 
