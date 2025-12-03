@@ -1,6 +1,6 @@
 # 3.2 MagicPlan API Integration
 
-The successful acquisition of accurate spatial data is the foundational step upon which the entire recommendation system is built. This section details the process of integrating with the MagicPlan API, which serves as the primary source for LiDAR-scanned floor plans. The integration involves identifying the correct API endpoints, analyzing the complex data structure of the responses, and developing a robust process for extracting, transforming, and storing the relevant information.
+The successful acquisition of accurate measurements is the foundational step upon which the entire recommendation system is built. This section details the process of integrating with the MagicPlan API, which serves as the primary source for LiDAR-scanned floor plans. The integration involves identifying the correct API endpoints, analyzing the complex data structure of the responses, and developing a robust process for extracting, transforming, and storing the relevant information.
 
 ### 3.2.1 API Endpoint Analysis
 

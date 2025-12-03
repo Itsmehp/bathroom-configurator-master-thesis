@@ -224,3 +224,75 @@ keywords = {ER model, conceptual model, integrity constraint, min-max cardinalit
   keywords = {Computer Science - Computer Vision and Pattern Recognition},
   file = {C\:\\Users\\HP\\Zotero\\storage\\AR29HHEL\\Le et al. - 2023 - VIDES Virtual Interior Design via Natural Language and Visual Guidance.pdf;C\:\\Users\\HP\\Zotero\\storage\\2T7D6S4I\\2308.html}
 }
+
+@article{gelisDeepUnsupervisedLearning2023,
+  title = {Deep {{Unsupervised Learning}} for {{3D ALS Point Cloud Change Detection}}},
+  author = {family=Gélis, given=Iris, prefix=de, useprefix=false and Saha, Sudipan and Shahzad, Muhammad and Corpetti, Thomas and Lefèvre, Sébastien and Zhu, Xiao Xiang},
+  date = {2023-08},
+  journaltitle = {ISPRS Open Journal of Photogrammetry and Remote Sensing},
+  shortjournal = {ISPRS Open Journal of Photogrammetry and Remote Sensing},
+  volume = {9},
+  eprint = {2305.03529},
+  eprinttype = {arXiv},
+  eprintclass = {eess},
+  pages = {100044},
+  issn = {26673932},
+  doi = {10.1016/j.ophoto.2023.100044},
+  url = {http://arxiv.org/abs/2305.03529},
+  urldate = {2025-12-03},
+  abstract = {Change detection from traditional \textbackslash added\{2D\} optical images has limited capability to model the changes in the height or shape of objects. Change detection using 3D point cloud \textbackslash added\{from photogrammetry or LiDAR surveying\} can fill this gap by providing critical depth information. While most existing machine learning based 3D point cloud change detection methods are supervised, they severely depend on the availability of annotated training data, which is in practice a critical point. To circumnavigate this dependence, we propose an unsupervised 3D point cloud change detection method mainly based on self-supervised learning using deep clustering and contrastive learning. The proposed method also relies on an adaptation of deep change vector analysis to 3D point cloud via nearest point comparison. Experiments conducted on \textbackslash added\{an aerial LiDAR survey dataset\} show that the proposed method obtains higher performance in comparison to the traditional unsupervised methods, with a gain of about 9\textbackslash\% in mean accuracy (to reach more than 85\textbackslash\%). Thus, it appears to be a relevant choice in scenario where prior knowledge (labels) is not ensured.},
+  keywords = {Electrical Engineering and Systems Science - Image and Video Processing},
+  file = {C\:\\Users\\HP\\Zotero\\storage\\9YEFUEQE\\Gélis et al. - 2023 - Deep Unsupervised Learning for 3D ALS Point Cloud Change Detection.pdf;C\:\\Users\\HP\\Zotero\\storage\\SS3HPFQ8\\2305.html}
+}
+
+@inproceedings{10.1145/3579371.3589113,
+author = {Ying, Ziyu and Bhuyan, Sandeepa and Kang, Yan and Zhang, Yingtian and Kandemir, Mahmut T. and Das, Chita R.},
+title = {EdgePC: Efficient Deep Learning Analytics for Point Clouds on Edge Devices},
+year = {2023},
+isbn = {9798400700958},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3579371.3589113},
+doi = {10.1145/3579371.3589113},
+abstract = {Recently, point cloud (PC) has gained popularity in modeling various 3D objects (including both synthetic and real-life) and has been extensively utilized in a wide range of applications such as AR/VR, 3D reconstruction, and autonomous driving. For such applications, it is critical to analyze/understand the surrounding scenes properly. To achieve this, deep learning based methods (e.g., convolutional neural networks (CNNs)) have been widely employed for higher accuracy. Unlike the deep learning on conventional 2D images/videos, where the feature computation (matrix multiplication) is the major bottleneck, in point cloud-based CNNs, the sample and neighbor search stages are the primary bottlenecks, and collectively contribute to 54\% (up to 80\%) of the overall execution latency on a typical edge device. While prior efforts have attempted to solve this issue by designing custom ASICs or pipelining the neighbor search with other stages, to our knowledge, none of them has tried to "structurize" the unstructured PC data for improving computational efficiency.In this paper, we first explore the opportunities of structurizing PC data using Morton code (which is originally designed to map data from a high dimensional space to one dimension, while preserving spatial locality) and observe that there is a huge scope to "skip" the sample and neighbor search computation by operating on the "structurized" PC data. Based on this, we propose two approximation techniques for the sampling and neighbor search stages. We implemented our proposals on an NVIDIA Jetson AGX Xavier edge GPU board. The evaluation results collected on six different workloads show that our design can accelerate the sample and neighbor search stages by 3.68\texttimes{} (up to 5.21\texttimes{}) with minimal impact on inference accuracy. This acceleration in turn results in 1.55\texttimes{} speedup in the end-to-end execution latency and saves 33\% of energy expenditure.},
+booktitle = {Proceedings of the 50th Annual International Symposium on Computer Architecture},
+articleno = {78},
+numpages = {14},
+keywords = {edge device, energy-efficiency, approximation, deep neural network, point cloud},
+location = {Orlando, FL, USA},
+series = {ISCA '23}
+}
+
+@INPROCEEDINGS{9414831,
+  author={Shao, Jiawei and Zhang, Haowei and Mao, Yuyi and Zhang, Jun},
+  booktitle={ICASSP 2021 - 2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+  title={Branchy-GNN: A Device-Edge Co-Inference Framework for Efficient Point Cloud Processing}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={8488-8492},
+  keywords={Three-dimensional displays;Speech coding;Signal processing;Feature extraction;Data processing;Mobile handsets;Graph neural networks;Point cloud;graph neural network (GNN);joint source-channel coding (JSCC);edge inference},
+  doi={10.1109/ICASSP39728.2021.9414831}}
+
+@ARTICLE{9843856,
+  author={Wisultschew, Cristian and Pérez, Alejandro and Otero, Andrés and Mujica, Gabriel and Portilla, Jorge},
+  journal={IEEE Sensors Journal}, 
+  title={Characterizing Deep Neural Networks on Edge Computing Systems for Object Classification in 3D Point Clouds}, 
+  year={2022},
+  volume={22},
+  number={17},
+  pages={17075-17089},
+  keywords={Point cloud compression;Sensors;Three-dimensional displays;Computer architecture;Laser radar;Image edge detection;Deep learning;Deep neural networks;edge computing;LIDAR;neural accelerators;object classification;point cloud},
+  doi={10.1109/JSEN.2022.3193060}}
+
+
+@online{MagicplanCloudAPI,
+  title = {Magicplan {{Cloud API}}},
+  url = {https://apidocs.magicplan.app/reference},
+  urldate = {2025-12-02},
+  abstract = {Beautiful API Documentation, built with Scalar},
+  langid = {english},
+  file = {C:\Users\HP\Zotero\storage\6PJVRD3P\reference.html}
+}
+
+

@@ -1,0 +1,37 @@
+---
+title: MagicPlan Data Extraction - Area Assignment Logic (Page 3/4)
+config:
+    theme: neutral
+---
+flowchart TD
+    %% Input
+    A[Map room to cleanedRoom] --> B{Area Source Decision}
+
+    %% Decision Logic
+    B -->|Check XML Areas First| C{"Is floorAreas[idx] a valid number?"}
+    B -->|Fallback to JSON| D["Use room.area_with_interior_walls_only"]
+
+    %% XML Path
+    C -->|Yes - XML Valid| E["area_with_interior_walls = floorAreas[idx]"]
+    C -->|No - XML Invalid| F["area_with_interior_walls = room.area_with_interior_walls_only || null"]
+
+    %% JSON Path
+    D --> F
+
+    %% Processing Notes
+    E --> G[XML areas preferred for accuracy]
+    F --> H[JSON fallback ensures data availability]
+
+    G --> I[Area assignment complete for this room]
+    H --> I
+
+    %% Styling
+    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef data fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef note fill:#f9f9f9,stroke:#666,stroke-width:1px
+
+    class A,B process
+    class C decision
+    class E,F data
+    class G,H,I note

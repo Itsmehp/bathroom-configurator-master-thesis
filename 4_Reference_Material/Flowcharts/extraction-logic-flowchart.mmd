@@ -1,0 +1,69 @@
+---
+title: MagicPlan Data Extraction Logic Flowchart
+config:
+    theme: neutral
+---
+flowchart TD
+    %% Input
+    A[MagicPlan API Response] --> B[extractPlanData Function]
+
+    %% Basic Plan Extraction
+    B --> C[Extract Basic Plan Info]
+    C --> D["planId = data?.data?.plan?.id"]
+    C --> E["planName = data?.data?.plan?.name"]
+    C --> F["thumbnailUrl = data?.data?.plan?.thumbnail_url"]
+
+    %% Room Data Extraction
+    B --> G[Extract Room Data]
+    G --> H["rooms = data?.data?.plan_detail?.plan?.floors?.[0]?.rooms"]
+
+    %% XML Floor Area Extraction
+    B --> I[Extract Floor Areas from XML]
+    I --> J["xmlString = data?.data?.plan_detail?.magicplan_format_xml"]
+    J --> K["extractFloorAreasFromMagicplanXml(xmlString)"]
+    K --> L["floorAreas Array"]
+
+    %% Room Processing Loop
+    H --> M[For each room in rooms]
+    M --> N[Map room to cleanedRoom]
+
+    %% Area Assignment Logic
+    N --> O{"Is floorAreas[idx] a valid number?"}
+    O -->|Yes| P["area_with_interior_walls = floorAreas[idx]"]
+    O -->|No| Q["area_with_interior_walls = room.area_with_interior_walls_only || null"]
+
+    %% Fixture Processing
+    N --> R[Process Fixtures]
+    R --> S[Extract furnitures array]
+    R --> T[Extract wall_items array]
+
+    %% Fixture Mapping
+    S --> U[Map each furniture to fixture]
+    T --> V[Map each wall_item to fixture]
+
+    U --> W["fixture = { name: f.symbol?.name, width: f.size?.x, depth: f.size?.y, height: f.size?.z }"]
+    V --> X["fixture = { name: w.symbol?.name, width: w.size?.x, depth: w.size?.y, height: w.size?.z }"]
+
+    %% Combine Fixtures
+    W --> Y[Combine furnitures and wall_items]
+    X --> Y
+
+    Y --> Z["cleanedRoom.fixtures = [...furnitures, ...wall_items]"]
+
+    %% Output
+    P --> AA[Create CleanedPlanData]
+    Q --> AA
+    Z --> AA
+
+    AA --> BB["Return { planId, name: planName, thumbnailUrl, rooms: cleanedRooms }"]
+
+    %% Styling
+    classDef input fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef output fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+
+    class A input
+    class B,C,G,I,M,N,R,S,T,U,V,Y,AA process
+    class O decision
+    class BB output

@@ -1,0 +1,39 @@
+---
+title: MagicPlan Data Extraction - Plan & Room Data (Page 2/4)
+config:
+    theme: neutral
+---
+flowchart TD
+    %% Input
+    A[extractPlanData Function] --> B[Extract Basic Plan Info]
+
+    %% Basic Plan Extraction
+    B --> C["planId = data?.data?.plan?.id"]
+    B --> D["planName = data?.data?.plan?.name"]
+    B --> E["thumbnailUrl = data?.data?.plan?.thumbnail_url"]
+
+    %% Room Data Extraction
+    A --> F[Extract Room Data]
+    F --> G["rooms = data?.data?.plan_detail?.plan?.floors?.[0]?.rooms"]
+
+    %% XML Floor Area Extraction
+    A --> H[Extract Floor Areas from XML]
+    H --> I["xmlString = data?.data?.plan_detail?.magicplan_format_xml"]
+    I --> J["extractFloorAreasFromMagicplanXml(xmlString)"]
+    J --> K["floorAreas Array - Indexed by room position"]
+
+    %% Room Processing Setup
+    G --> L[For each room in rooms array]
+    K --> L
+
+    L --> M[Map room to cleanedRoom object]
+
+    %% Styling
+    classDef input fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef data fill:#fff3e0,stroke:#e65100,stroke-width:2px
+
+    class A input
+    class B,F,H,L,M process
+    class C,D,E,G,I,J data
+    class K data

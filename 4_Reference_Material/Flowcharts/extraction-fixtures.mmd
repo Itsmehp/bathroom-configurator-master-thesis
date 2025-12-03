@@ -1,0 +1,39 @@
+---
+title: MagicPlan Data Extraction - Fixture Processing (Page 4/4)
+config:
+    theme: neutral
+---
+flowchart TD
+    %% Input
+    A[Map room to cleanedRoom] --> B[Process Fixtures]
+
+    %% Extract Fixture Arrays
+    B --> C[Extract furnitures array]
+    B --> D[Extract wall_items array]
+
+    %% Furniture Processing
+    C --> E[For each furniture item]
+    E --> F["Map to fixture: { name: f.symbol?.name, width: f.size?.x, depth: f.size?.y, height: f.size?.z }"]
+
+    %% Wall Items Processing
+    D --> G[For each wall_item]
+    G --> H["Map to fixture: { name: w.symbol?.name, width: w.size?.x, depth: w.size?.y, height: w.size?.z }"]
+
+    %% Combine Fixtures
+    F --> I[Combine all fixtures]
+    H --> I
+
+    I --> J["cleanedRoom.fixtures = [...furnitures, ...wall_items]"]
+
+    %% Output Assembly
+    J --> K[Create CleanedPlanData object]
+    K --> L["Return { planId, name, thumbnailUrl, rooms: cleanedRooms }"]
+
+    %% Styling
+    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef data fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef output fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+
+    class A,B,C,D,E,G,I,K process
+    class F,H,J data
+    class L output

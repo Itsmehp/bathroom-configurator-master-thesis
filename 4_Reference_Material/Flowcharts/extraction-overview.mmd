@@ -1,0 +1,35 @@
+---
+title: MagicPlan Data Extraction - Overview (Page 1/4)
+config:
+    theme: neutral
+---
+flowchart TD
+    %% Input
+    A[MagicPlan API Response] --> B[extractPlanData Function]
+
+    %% Main Processing Steps
+    B --> C[Extract Basic Plan Info]
+    B --> D[Extract Room Data]
+    B --> E[Extract Floor Areas from XML]
+
+    %% Room Processing
+    D --> F[Process Each Room]
+    E --> F
+
+    F --> G[Assign Area Values]
+    F --> H[Process Fixtures]
+
+    %% Output
+    G --> I[Create CleanedPlanData]
+    H --> I
+
+    I --> J[Return Standardized Data]
+
+    %% Styling
+    classDef input fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef output fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+
+    class A input
+    class B,C,D,E,F,G,H,I process
+    class J output
