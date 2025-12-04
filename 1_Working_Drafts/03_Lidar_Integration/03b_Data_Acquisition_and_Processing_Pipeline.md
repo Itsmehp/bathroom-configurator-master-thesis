@@ -1,8 +1,8 @@
-# 3.2 MagicPlan API Integration
+# 3.2 Data Acquisition and Processing Pipeline
 
-The successful acquisition of accurate measurements is the foundational step upon which the entire recommendation system is built. This section details the process of integrating with the MagicPlan API, which serves as the primary source for LiDAR-scanned floor plans. The integration involves identifying the correct API endpoints, analyzing the complex data structure of the responses, and developing a robust process for extracting, transforming, and storing the relevant information.
+The successful acquisition of accurate measurements is the foundational step upon which the entire recommendation system is built. This section details the complete pipeline for integrating with the MagicPlan API, from fetching raw data to processing it into a structured format suitable for the recommendation engine. The process involves identifying the correct API endpoints, analyzing the complex data structure, transforming the raw data, and classifying fixtures.
 
-### 3.2.1 API Endpoint Analysis
+### 3.2.1 Interfacing with the MagicPlan API
 
 The system interacts with two principal RESTful endpoints provided by the MagicPlan API to retrieve user-specific plan data \cite{MagicplanCloudAPI}:
 
@@ -10,11 +10,9 @@ The system interacts with two principal RESTful endpoints provided by the MagicP
 
 2.  **`GET /plans/{planId}`**: Once a user selects a plan, this endpoint is called using the specific `planId`. It returns a detailed, verbose JSON object representing the entire floor plan, including all its rooms, fixtures, and structural elements. This detailed response is the primary source for all measurement and fixture data used by the recommendation algorithms.
 
-### 3.2.2 Analysis of the Plan Data Structure
+### 3.2.2 Raw Data Transformation and Cleaning
 
 The JSON response from the `GET /plans/{planId}` endpoint is substantial, with an average size of approximately 487 KB. The most critical data is nested within the `data.data` object, which contains both high-level plan details and a `plan_detail` object with the granular room-by-room breakdown. The system is designed to navigate this complex structure to extract only the most relevant information for processing.
-
-### 3.2.3 Data Extraction and Transformation
 
 Due to the size and complexity of the API response, a multi-step data extraction and transformation process was implemented to parse the raw data and map it to the system's database schema. This process is handled by a dedicated `extractPlanData` function.
 
@@ -32,6 +30,14 @@ The extraction logic proceeds as follows:
     *   Finally, the two resulting lists of mapped objects are concatenated into a single, unified `fixtures` array for the room.
 
 4.  **Final Data Assembly:** The extracted `planId`, `name`, `thumbnailUrl`, and the processed array of `rooms` (each now containing its calculated area and unified `fixtures` list) are assembled into a clean, standardized `CleanedPlanData` object, which is then ready for persistence in the database. This multi-step, hybrid approach is essential for navigating the idiosyncrasies of the MagicPlan API and constructing a reliable data model.
+
+### 3.2.3 Automated Fixture Recognition and Classification
+
+*This section will explain the implementation of an autofill feature for fixture recognition, including the ability for users to override the automated suggestions. The algorithms detailed in the previous section for processing `furnitures` and `wall_items` form the basis of this automated recognition. The system maps raw names like "Bathtub" or "Shower" to internal system categories, which then autofill the relevant measurement fields in the user interface, streamlining the configuration process.*
+
+### 3.2.4 Data Persistence
+
+*This section will describe the pipeline for processing floor plan data, including the analysis of the JSON structure, the algorithms used for fixture detection, and the methods for data storage. The final step in the pipeline is storing the processed floor plan data. This involves saving the structured `CleanedPlanData` object, including all rooms and their recognized fixtures, into the PostgreSQL database. This ensures the data is readily available for the recommendation algorithms without needing to re-process the raw API response for every user session, thereby improving system performance and creating a persistent record of the project.*
 
 ---
 
