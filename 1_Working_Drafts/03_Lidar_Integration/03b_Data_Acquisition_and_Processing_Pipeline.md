@@ -64,33 +64,17 @@ This hierarchical data model ensures that all relevant information is captured i
 
 ### What to Write Next (Missing Information)
 
-To make this section comprehensive for a Master's Thesis, you should add the following details:
+This section has a strong conceptual foundation. To make it comprehensive for a Master's Thesis, you should now add the following implementation details:
 
-1.  **Algorithmic Pseudo-code:** Provide pseudo-code for the main `extractPlanData` function. This should clearly show the sequence of operations: extracting basic info, calling the XML parser, looping through rooms, applying the area fallback logic, and processing both the `furnitures` and `wall_items` arrays.
+1.  **XML Parsing Implementation:** You mention using a helper function, `extractFloorAreasFromMagicplanXml`. Based on the code provided, this function uses Regular Expressions instead of a formal XML parsing library. You should briefly explain this implementation:
+    *   Justify the choice to use regex. Was it for performance, simplicity, or to handle the specific, non-standard nature of the embedded XML string?
+    *   Describe how the regex patterns (`/<floor.../g` and `/<plan.../i`) are designed to specifically target and extract the `areaWithInteriorWallsOnly` and `interiorWallWidth` attributes while ignoring other XML content.
 
-2.  **XML Parsing Implementation:** Briefly explain the implementation of the `extractFloorAreasFromMagicplanXml` function. What library was used for XML parsing (e.g., `fast-xml-parser` in JavaScript), and how does it navigate the XML tree to locate and extract the area values?
+2.  **Detailed Error Handling Strategy:** Your system uses a multi-layered approach to handling errors. You should describe these layers:
+    *   **Proactive API Health Check:** Explain how the system's health check endpoint monitors the MagicPlan API's status to preemptively flag connection issues.
+    *   **Robust API Response Handling:** Describe how your backend routes (e.g., `/api/magicplan/:planId`) validate input and translate upstream errors from the MagicPlan API or invalid client requests into meaningful HTTP status codes (like 400, 401, 404, 409) for the frontend.
+    *   **Data-Level Fault Tolerance:** The `extractMagicplanXmlAttributes` function includes a `try...catch` block that intentionally "swallows" parsing errors. Justify this design choice. Does this ensure the data pipeline can continue processing a plan even if parts of the XML are malformed, by defaulting to `null` values?
 
-3.  **Detailed Error Handling:** How does the extraction logic handle potential data integrity issues?
-    -   What happens if the `magicplan_format_xml` string is present but malformed?
-    -   How does the system behave if the `furnitures` or `wall_items` arrays are missing for a particular room? Does it create a room with no fixtures, or does it raise an error?
-
-4.  **Data Mapping and Cleaning:** Provide a table or a more detailed description of the mapping from the raw API fields (e.g., `f.symbol.name`, `f.size.x`) to your application's fixture properties (`name`, `width`). Mention any data cleaning steps, such as trimming whitespace from names or validating that dimension values are positive numbers.
-
-
-implementation flowchart
-
-in my app set magicplan api keys
-
-user uses magicplan to generate a bathroom floor plan
-
-magicplan handles the data and genrates a bathroom floor plan with accurate measurements.
-
-My app gives user all the plans to select from.
-
-user seelects a plan and saves the plan (saves fixtures, plan, room)
-
-User uses this plan in bathroom renovation tab. where he can select the plan
-
-currently 2 fixtures will be found using keywords dusche and bade , shower and bathtub, from the stored plan in the db.
-
-the user will be shown measurements of bathtub and shower and will alredy have desired measurement set same as shower.
+***Note on Completed Items:***
+*   **Algorithmic Pseudo-code:** As you noted, this will be covered in Chapter 5 (System Implementation). This point is now resolved for this section.
+*   **Data Mapping:** The Mermaid flowchart you provided is an excellent way to present the data mapping from the API to your database schema. It clearly and visually documents the process and is suitable for inclusion in your thesis. This point is now resolved.
