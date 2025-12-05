@@ -54,3 +54,22 @@ To make this section comprehensive for a Master's Thesis, you should add the fol
     -   How does the system behave if the `furnitures` or `wall_items` arrays are missing for a particular room? Does it create a room with no fixtures, or does it raise an error?
 
 4.  **Data Mapping and Cleaning:** Provide a table or a more detailed description of the mapping from the raw API fields (e.g., `f.symbol.name`, `f.size.x`) to your application's fixture properties (`name`, `width`). Mention any data cleaning steps, such as trimming whitespace from names or validating that dimension values are positive numbers.
+
+
+implementation flowchart
+
+in my app set magicplan api keys
+
+user uses magicplan to generate a bathroom floor plan
+
+magicplan handles the data and genrates a bathroom floor plan with accurate measurements.
+
+My app gives user all the plans to select from.
+
+user seelects a plan and saves the plan (saves fixtures, plan, room)
+
+User uses this plan in bathroom renovation tab. where he can select the plan
+
+currently 2 fixtures will be found using keywords dusche and bade , shower and bathtub, from the stored plan in the db.
+
+the user will be shown measurements of bathtub and shower and will alredy have desired measurement set same as shower.
