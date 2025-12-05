@@ -29,7 +29,7 @@ The extraction logic proceeds as follows:
     *   It then performs the same iteration and mapping process for the `wall_items` array.
     *   Finally, the two resulting lists of mapped objects are concatenated into a single, unified `fixtures` array for the room.
 
-4.  **Final Data Assembly:** The extracted `planId`, `name`, `thumbnailUrl`, and the processed array of `rooms` (each now containing its calculated area and unified `fixtures` list) are assembled into a clean, standardized `CleanedPlanData` object, which is then ready for persistence in the database. This multi-step, hybrid approach is essential for navigating the idiosyncrasies of the MagicPlan API and constructing a reliable data model.
+4.  **Final Data Assembly:** The extracted `planId`, `name`, `thumbnailUrl`, and the processed array of `rooms` (each now containing its calculated area and unified `fixtures` list) are assembled into a clean, standardized `CleanedPlanData` object, which is then ready for persistence in the database. It is important to note that a deprecated `extraInfo` column previously existed in the database table for plans. This column stored spatial data in JSON format, including fixture size, position, rotation, and exterior wall coordinates (e.g., `[x1,y1]` and `[x2,y2]`). While initially used for testing spatial analysis, this column is no longer utilized due to limitations that will be discussed later in the system implementation phase. This multi-step, hybrid approach is essential for navigating the idiosyncrasies of the MagicPlan API and constructing a reliable data model.
 
 ### 3.2.3 Automated Fixture Recognition and Classification
 
