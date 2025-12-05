@@ -33,115 +33,31 @@ The extraction logic proceeds as follows:
 
 ### 3.2.3 Automated Fixture Recognition and Classification
 
-*This section will explain the implementation of an autofill feature for fixture recognition, including the ability for users to override the automated suggestions. The algorithms detailed in the previous section for processing `furnitures` and `wall_items` form the basis of this automated recognition. The system maps raw names like "Bathtub" or "Shower" to internal system categories, which then autofill the relevant measurement fields in the user interface, streamlining the configuration process.*
+A primary goal of the data processing pipeline is to identify specific fixtures from the raw MagicPlan data (e.g., "Eckdusche", "Badewanne") so they can be used by the recommendation engine. Rather than implementing a complex classification system during data ingestion, a more pragmatic approach was chosen due to the project's initial focus on the German market.
 
-The raw fixtures names that are recieved from magicplan api (e.g Eckdusche, Badewanne) needs to be standardized internal categories that the database queries can understand when requesting measurements for these fixtures. but such a system was not implemented instead we used this system "const prefillFromPlan = (plan: DetailedPlan) => {
+The chosen method is a simple and effective keyword-matching algorithm. Raw fixture names are stored in the database without modification. When a user selects a plan in the frontend application, the system logic scans the list of fixture names for specific German substrings—"dusche" for showers and "badewanne" for bathtubs. If a match is found, the system uses that fixture's dimensions to pre-fill the relevant measurement fields for the user. This approach was selected for its simplicity and has proven robust for the current scope, as raw fixture names like "Rechteckige Dusche" or "Duschtür" are correctly identified.
 
-    // Prefill from fixtures in the plan
-
-    const badewanne = plan.fixtures?.find((f) =>
-
-      f.name?.toLowerCase().includes("badewanne")
-
-    );
-
-    const dusche = plan.fixtures?.find((f) =>
-
-      f.name?.toLowerCase().includes("dusche")
-
-    );
-
-  
-
-    if (badewanne) {
-
-      setMeasurements((prev) => ({
-
-        ...prev,
-
-        badewanne: {
-
-          width: ((badewanne.width || 0) * 100).toString(),
-
-          depth: ((badewanne.depth || 0) * 100).toString(),
-
-        },
-
-      }));
-
-    }
-
-  
-
-    if (dusche) {
-
-      setMeasurements((prev) => ({
-
-        ...prev,
-
-        dusche: {
-
-          width: ((dusche.width || 0) * 100).toString(),
-
-          depth: ((dusche.depth || 0) * 100).toString(),
-
-        },
-
-        wunschDusche: {
-
-          width: ((dusche.width || 0) * 100).toString(),
-
-          depth: ((dusche.depth || 0) * 100).toString(),
-
-        },
-
-      }));
-
-    }
-
-  };"
- to just query the database if the fixtures are present and convert them to cm and fill them up in the frontend.
-this method was chosen for its simplicity since the project scope was only aimed towards german market the app configures name that contain german names for shower and bathtub that is dusche and badewanne respectively. currently the app has never found English words in all plans that were provided. the names are mostly stored as: Badewanne, Eckdusche 2,Rechteckige Dusche, Duschtür. 
 ### 3.2.4 Data Persistence
 
-*This section will describe the pipeline for processing floor plan data, including the analysis of the JSON structure, the algorithms used for fixture detection, and the methods for data storage. The final step in the pipeline is storing the processed floor plan data. This involves saving the structured `CleanedPlanData` object, including all rooms and their recognized fixtures, into the PostgreSQL database. This ensures the data is readily available for the recommendation algorithms without needing to re-process the raw API response for every user session, thereby improving system performance and creating a persistent record of the project.*
+To ensure system performance and create a persistent record for each project, the processed plan data is stored in a database. This strategy avoids the need for repeated, costly API calls to MagicPlan for every user session. Before persistence, the data is organized into a standardized structure, conceptually known as `CleanedPlanData`, which ensures that all information is consistent and easily accessible.
 
-To ensure system performance, speed and create a presistent record for each project, the processed plan data is stored in the database. This avoids the need for repeated and slow api calls to magicplan for every user session. structure of cleanPlanData:
-export interface CleanedPlanData {
+This data model is composed of the following nested entities:
 
-  planId: string | null;
+*   **CleanedPlanData**: The root object representing a single floor plan. It contains:
+    *   A unique `planId`.
+    *   A user-assigned `name`.
+    *   A `thumbnailUrl` for a preview image.
+    *   A list of all associated `Room` objects.
 
-  name: string | null;
+*   **CleanedRoom**: An object representing a single room within the plan. It contains:
+    *   The calculated `area_with_interior_walls`.
+    *   A list of all `Fixture` objects located within that room.
 
-  thumbnailUrl: string | null;
+*   **CleanedFixture**: An object representing a single fixture. It contains:
+    *   The original, unprocessed `name` from the API.
+    *   The dimensional properties: `width`, `depth`, and `height`.
 
-  rooms: CleanedRoom[];
-
-}
-export interface CleanedFixture {
-
-  name: string | null;
-
-  width: number | null;
-
-  depth: number | null;
-
-  height: number | null;
-
-}
-
-  
-
-export interface CleanedRoom {
-
-  area_with_interior_walls: number | null;
-
-  fixtures: CleanedFixture[];
-
-}
-
-.
-this storage ensures a well structured and accessible fixtures.
+This hierarchical data model ensures that all relevant information is captured in a structured format, ready for efficient storage and subsequent retrieval by the recommendation algorithms.
 
 
 ---
