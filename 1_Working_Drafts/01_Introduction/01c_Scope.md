@@ -9,6 +9,8 @@ The primary function of the system is to provide recommendations for common upgr
 - Replacement of existing shower enclosures  
 - Conversion of bathtubs into standalone showers  
 
+Furthermore, while the system facilitates product selection, the generation of a fully automated, cost-optimized financial quotation is explicitly out of scope. This is because such a feature would require capturing complex, situational business logic and data points (e.g., plumbing and tiling costs) that are not available from the primary data source.
+
 Accordingly, the product database and recommendation algorithms concentrate on shower doors, shower side panels, and shower trays. Other components typically involved in comprehensive bathroom renovations, such as lighting, tiling, sinks, or toilets, are deliberately excluded from this study; however, the underlying database structure is designed to allow these categories to be added with minimal effort.
 
 Technical and Implementation Constraints  
