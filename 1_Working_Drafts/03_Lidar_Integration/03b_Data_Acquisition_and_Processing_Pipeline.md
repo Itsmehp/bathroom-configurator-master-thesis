@@ -35,9 +35,114 @@ The extraction logic proceeds as follows:
 
 *This section will explain the implementation of an autofill feature for fixture recognition, including the ability for users to override the automated suggestions. The algorithms detailed in the previous section for processing `furnitures` and `wall_items` form the basis of this automated recognition. The system maps raw names like "Bathtub" or "Shower" to internal system categories, which then autofill the relevant measurement fields in the user interface, streamlining the configuration process.*
 
+The raw fixtures names that are recieved from magicplan api (e.g Eckdusche, Badewanne) needs to be standardized internal categories that the database queries can understand when requesting measurements for these fixtures. but such a system was not implemented instead we used this system "const prefillFromPlan = (plan: DetailedPlan) => {
+
+    // Prefill from fixtures in the plan
+
+    const badewanne = plan.fixtures?.find((f) =>
+
+      f.name?.toLowerCase().includes("badewanne")
+
+    );
+
+    const dusche = plan.fixtures?.find((f) =>
+
+      f.name?.toLowerCase().includes("dusche")
+
+    );
+
+  
+
+    if (badewanne) {
+
+      setMeasurements((prev) => ({
+
+        ...prev,
+
+        badewanne: {
+
+          width: ((badewanne.width || 0) * 100).toString(),
+
+          depth: ((badewanne.depth || 0) * 100).toString(),
+
+        },
+
+      }));
+
+    }
+
+  
+
+    if (dusche) {
+
+      setMeasurements((prev) => ({
+
+        ...prev,
+
+        dusche: {
+
+          width: ((dusche.width || 0) * 100).toString(),
+
+          depth: ((dusche.depth || 0) * 100).toString(),
+
+        },
+
+        wunschDusche: {
+
+          width: ((dusche.width || 0) * 100).toString(),
+
+          depth: ((dusche.depth || 0) * 100).toString(),
+
+        },
+
+      }));
+
+    }
+
+  };"
+ to just query the database if the fixtures are present and convert them to cm and fill them up in the frontend.
+this method was chosen for its simplicity since the project scope was only aimed towards german market the app configures name that contain german names for shower and bathtub that is dusche and badewanne respectively. currently the app has never found English words in all plans that were provided. the names are mostly stored as: Badewanne, Eckdusche 2,Rechteckige Dusche, Duschtür. 
 ### 3.2.4 Data Persistence
 
 *This section will describe the pipeline for processing floor plan data, including the analysis of the JSON structure, the algorithms used for fixture detection, and the methods for data storage. The final step in the pipeline is storing the processed floor plan data. This involves saving the structured `CleanedPlanData` object, including all rooms and their recognized fixtures, into the PostgreSQL database. This ensures the data is readily available for the recommendation algorithms without needing to re-process the raw API response for every user session, thereby improving system performance and creating a persistent record of the project.*
+
+To ensure system performance, speed and create a presistent record for each project, the processed plan data is stored in the database. This avoids the need for repeated and slow api calls to magicplan for every user session. structure of cleanPlanData:
+export interface CleanedPlanData {
+
+  planId: string | null;
+
+  name: string | null;
+
+  thumbnailUrl: string | null;
+
+  rooms: CleanedRoom[];
+
+}
+export interface CleanedFixture {
+
+  name: string | null;
+
+  width: number | null;
+
+  depth: number | null;
+
+  height: number | null;
+
+}
+
+  
+
+export interface CleanedRoom {
+
+  area_with_interior_walls: number | null;
+
+  fixtures: CleanedFixture[];
+
+}
+
+.
+this storage ensures a well structured and accessible fixtures.
+
 
 ---
 
