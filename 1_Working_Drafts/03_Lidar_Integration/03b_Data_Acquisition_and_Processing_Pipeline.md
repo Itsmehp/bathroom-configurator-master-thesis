@@ -16,12 +16,19 @@ The JSON response from the `GET /plans/{planId}` endpoint is substantial, with a
 
 Due to the size and complexity of the API response, a multi-step data extraction and transformation process was implemented to parse the raw data and map it to the system's database schema. This process is handled by a dedicated `extractPlanData` function.
 
+#### 3.2.2.1 Data Mapping Overview
+A detailed breakdown of the mapping between the MagicPlan API response fields and the system's database schema is presented in Table 3.1.
+
+*[PLACEHOLDER: Insert Mermaid Chart as Figure/Table here]*
+
+**Table 3.1:** This table provides a comprehensive overview of the data mapping process, detailing how raw fields from the MagicPlan API are transformed and stored in the system's database. It covers the mapping for Plan, Room, and Fixture entities, including the hybrid strategy for area calculation, the consolidation of fixture arrays, and notes on deprecated fields.
+
 The extraction logic proceeds as follows:
 
 1.  **Basic Plan Information Extraction:** First, high-level plan details are extracted from the `data.data.plan` object, including the `id` (as `planId`), `name`, and `thumbnail_url`.
 
 2.  **Hybrid Room Area Processing:** The process for determining room area employs a robust hybrid strategy that combines data from two different sources within the API response for maximum accuracy.
-    *   **Primary Source (XML):** The system's primary source for area data is an embedded XML string located at `data.data.plan_detail.magicplan_format_xml`. This XML is parsed by a helper function, `extractFloorAreasFromMagicplanXml`, which returns an indexed array of the most accurate floor area values.
+    *   **Primary Source (XML):** The system's primary source for area data is an embedded XML string located at `data.data.plan_detail.magicplan_format_xml`. Instead of employing a full XML parsing library, which would be inefficient for this specific task, a lightweight approach using Regular Expressions was implemented in the helper function `extractFloorAreasFromMagicplanXml`. This method uses a targeted regex pattern to directly find and capture the `areaWithInteriorWallsOnly` attribute for each `<floor>` tag, offering a significant performance advantage and robustness for this specific data extraction task.
     *   **Fallback Mechanism (JSON):** In cases where the XML data is missing or invalid for a specific room, the system implements a fallback. It retrieves the area from the `area_with_interior_walls_only` property within the standard room object, located at `data.data.plan_detail.plan.floors[0].rooms`. This ensures that an area value is always available if possible.
 
 3.  **Consolidated Fixture Processing:** A significant complexity in the raw data is that fixtures are not stored in a single list. Instead, they are split across two separate arrays within each room object: `furnitures` and `wall_items`. The system processes these as follows:
@@ -59,22 +66,11 @@ This data model is composed of the following nested entities:
 
 This hierarchical data model ensures that all relevant information is captured in a structured format, ready for efficient storage and subsequent retrieval by the recommendation algorithms.
 
+### 3.2.5 System Robustness and Error Handling
+To ensure reliability, the system incorporates a multi-layered error handling strategy, addressing potential failures at the API, data, and service levels.
 
----
+*   **API Response Handling:** The system's own backend endpoints provide a robust error-handling layer between the client and the external MagicPlan API. As defined in the API specification, endpoints validate incoming requests and translate any upstream API errors or invalid parameters into clear HTTP status codes (e.g., 400 for a bad request, 401 for authorization failure, 409 for a resource conflict). This ensures the frontend client receives predictable and actionable feedback.
 
-### What to Write Next (Missing Information)
+*   **Data-Level Fault Tolerance:** At the data processing level, the function responsible for parsing the embedded XML string (`extractMagicplanXmlAttributes`) is wrapped in a `try...catch` block. This is a deliberate design choice to "swallow" parsing errors. If the XML string is malformed or missing, the function returns `null` instead of halting the entire operation. This fault-tolerant approach ensures that the system can still process and save the remainder of a plan's data, even if one part is corrupted.
 
-This section has a strong conceptual foundation. To make it comprehensive for a Master's Thesis, you should now add the following implementation details:
-
-1.  **XML Parsing Implementation:** You mention using a helper function, `extractFloorAreasFromMagicplanXml`. Based on the code provided, this function uses Regular Expressions instead of a formal XML parsing library. You should briefly explain this implementation:
-    *   Justify the choice to use regex. Was it for performance, simplicity, or to handle the specific, non-standard nature of the embedded XML string?
-    *   Describe how the regex patterns (`/<floor.../g` and `/<plan.../i`) are designed to specifically target and extract the `areaWithInteriorWallsOnly` and `interiorWallWidth` attributes while ignoring other XML content.
-
-2.  **Detailed Error Handling Strategy:** Your system uses a multi-layered approach to handling errors. You should describe these layers:
-    *   **Proactive API Health Check:** Explain how the system's health check endpoint monitors the MagicPlan API's status to preemptively flag connection issues.
-    *   **Robust API Response Handling:** Describe how your backend routes (e.g., `/api/magicplan/:planId`) validate input and translate upstream errors from the MagicPlan API or invalid client requests into meaningful HTTP status codes (like 400, 401, 404, 409) for the frontend.
-    *   **Data-Level Fault Tolerance:** The `extractMagicplanXmlAttributes` function includes a `try...catch` block that intentionally "swallows" parsing errors. Justify this design choice. Does this ensure the data pipeline can continue processing a plan even if parts of the XML are malformed, by defaulting to `null` values?
-
-***Note on Completed Items:***
-*   **Algorithmic Pseudo-code:** As you noted, this will be covered in Chapter 5 (System Implementation). This point is now resolved for this section.
-*   **Data Mapping:** The Mermaid flowchart you provided is an excellent way to present the data mapping from the API to your database schema. It clearly and visually documents the process and is suitable for inclusion in your thesis. This point is now resolved.
+*   **Proactive Service Monitoring:** A dedicated health check endpoint is included in the system. This endpoint can be used to monitor the connectivity and status of critical external services like the MagicPlan API, allowing for proactive identification of upstream issues that could impact system functionality.
