@@ -12,23 +12,25 @@ The system interacts with two principal RESTful endpoints provided by the MagicP
 
 ### 3.2.2 Raw Data Transformation and Cleaning
 
-The JSON response from the `GET /plans/{planId}` endpoint is substantial and serves as the primary source of truth for all critical data used in the system. The system is designed to navigate this complex, nested structure to extract only the most relevant information for processing. A dedicated `extractPlanData` function handles this multi-step data extraction and transformation.
+The JSON response from the `GET /plans/{planId}` endpoint is substantial, with an average size of approximately 487 KB based on an analysis of a sample of 365 floor plans, and serves as the primary source of truth for all critical data used in the system. The system is designed to navigate this complex, nested structure to extract only the most relevant information for processing. A dedicated `extractPlanData` function handles this multi-step data extraction and transformation.
 
 The simplified data flow, from API endpoint to the core database entities, is illustrated in Figure 3.1.
 
 *[PLACEHOLDER: Insert new simplified Mermaid Chart as Figure here]*
 
-**Figure 3.1:** This figure illustrates the data extraction pipeline. It shows how key metadata and structural information are sourced exclusively from the JSON payloads of the `GET /plans` and `GET /plans/{planId}` endpoints and mapped directly to the `Plan`, `Room`, and core `Fixture` database tables.
+**Figure 3.1:** This figure illustrates oversimplified data extraction pipeline. It shows how key metadata and structural information are sourced exclusively from the JSON payloads of the `GET /plans` and `GET /plans/{planId}` endpoints and mapped directly to the `Plan`, `Room`, and core `Fixture` database tables.
 
 The extraction logic proceeds as follows:
 
 1.  **Basic Plan Information Extraction:** High-level plan details are extracted from the `data.data.plan` object within the JSON response, including the `id` (as `planId`), `name`, and `thumbnail_url`.
 
-2.  **Consolidated Fixture Processing:** A key challenge in the raw JSON is that fixtures are not in a single list. They are split across two arrays within each room object: `furnitures` and `wall_items`. The system processes these by iterating through both arrays, mapping each object to a standardized fixture format, and concatenating them into a single, unified `fixtures` list. This consolidated list represents the core data used by the recommendation engine.
+2.  **Room Area Extraction:** For each room object in the JSON, the system extracts the value from the `area_with_interior_walls_only` property to serve as the room's area measurement.
 
-3.  **Note on Legacy Data Formats:** The API response also contains a secondary, embedded XML string (`magicplan_format_xml`). While this field was explored during initial development for certain values like `areaWithInteriorWallsOnly`, the final implementation relies exclusively on the more structured and reliable JSON data for all core entities. The data from the XML source is not used in the production system.
+3.  **Consolidated Fixture Processing:** A key challenge presented by the raw JSON data is that fixtures are not located in a single, unified list. Instead, they are split across two separate arrays within each room object: `furnitures` and `wall_items`. The system processes these by iterating through both arrays, mapping each object to a standardized fixture format, and concatenating them into a single, unified `fixtures` list for each room.
 
-4.  **Final Data Assembly:** The extracted `planId`, `name`, `thumbnailUrl`, and the processed array of `rooms` (each containing its unified `fixtures` list) are assembled into a clean, standardized `CleanedPlanData` object, ready for persistence in the database.
+4.  **Note on Legacy Data Formats:** The API response also contains a secondary, embedded XML string (`magicplan_format_xml`). While this field was explored during initial development for certain values like `areaWithInteriorWallsOnly`, the final implementation relies exclusively on the more structured and reliable JSON data for all core entities. The data from the XML source is not used in the production system.
+
+5.  **Final Data Assembly:** The extracted `planId`, `name`, `thumbnailUrl`, and the processed array of `rooms` (each now containing its calculated area and unified `fixtures` list) are assembled into a clean, standardized `CleanedPlanData` object, ready for persistence in the database.
 
 ### 3.2.3 Automated Fixture Recognition and Classification
 
@@ -38,7 +40,7 @@ The chosen method is a simple and effective keyword-matching algorithm. Raw fixt
 
 ### 3.2.4 Data Persistence
 
-To ensure system performance and create a persistent record for each project, the processed plan data is stored in a database. This strategy avoids the need for repeated, costly API calls to MagicPlan for every user session. Before persistence, the data is organized into a standardized structure, conceptually known as `CleanedPlanData`, which ensures that all information is consistent and easily accessible.
+To ensure system performance and create a persistent record for each project, the processed plan data is stored in a database. This strategy avoids the need for repeated, costly, and time-consuming API calls to MagicPlan for every user session. Before persistence, the data is organized into a standardized structure, conceptually known as `CleanedPlanData`, which ensures that all information is consistent and easily accessible.
 
 This data model is composed of the following nested entities:
 
